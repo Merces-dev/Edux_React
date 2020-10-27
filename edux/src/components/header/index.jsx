@@ -21,8 +21,12 @@ const Header = () => {
                 <Nav>
                 <Nav.Link href="/">Home</Nav.Link>
 
-                    <Nav.Link href="/eventos">Eventos</Nav.Link>
-                    <Nav.Link href="/categorias">Categorias</Nav.Link>
+                    <Nav.Link href="/">-</Nav.Link>
+                    <Nav.Link href="/">=</Nav.Link>
+                    <Nav.Link href="/">=</Nav.Link>
+                    <Nav.Link href="/">=</Nav.Link>
+                    <Nav.Link href="/">=</Nav.Link>
+
 
                     <NavDropdown /*title={jwt_decode(token).family_name}*/ id="basic-nav-dropdown">
                         <NavDropdown.Item href="/perfil">Perfil </NavDropdown.Item >
