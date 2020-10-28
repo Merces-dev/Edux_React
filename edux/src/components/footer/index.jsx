@@ -7,7 +7,7 @@ import '../footer/index.css';
 
 const Footer = () => {
     return (
-        <div>
+        <div className=' footer '>
             <br />
             <Navbar bg='success' variant='dark' className='justify-content-around text-white py-3' >
                 <Nav className='d-flex flex-column navTxtImg '>
