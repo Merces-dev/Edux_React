@@ -10,9 +10,18 @@ html,
     width: 150px;
   }
 .size-container-login{
-      width: 500px;
-      height: 600px;
+      width: 400px;
+      height: 500px;
 }
 .mt-30{
     margin-top: 30px;
 }
+
+@media (max-width: 550px){
+  .size-container-login{
+    width: 350px;
+  }
+
+}
+
+

@@ -9,14 +9,14 @@ const Footer = () => {
     return (
         <div className=' footer '>
             <br />
-            <Navbar bg='success' variant='dark' className='justify-content-around text-white py-3' >
-                <Nav className='d-flex flex-column navTxtImg '>
+            <Navbar bg='success' variant='dark' className='justify-content-around text-white py-3 column align' >
+                <Nav className='d-flex flex-column navTxtImg mt-30'>
                     <Navbar.Brand href="#home"><img src={logo} className="imgfooter " alt="Edux" /></Navbar.Brand>
                     <Nav.Item > Sua plataforma de estudos online</Nav.Item>
 
                 </Nav>
 
-                <Nav className='d-flex flex-column '>
+                <Nav className='d-flex flex-column mt-30'>
                     <Nav.Item >Fale Conosco : </Nav.Item>
                     <Nav.Item >
                         <svg width="1.2em" height="2em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@ const Footer = () => {
                         </Nav.Item>
 
                 </Nav>
-                <Nav className='d-flex flex-column navTxtImg '>
+                <Nav className='d-flex flex-column navTxtImg mt-30'>
                     <Nav.Item>Fique Atualizado :</Nav.Item>
                     <br/>
                     <form>

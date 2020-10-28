@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-import Logo from '../../assets/img/logo-branco.png'
 import LogoColorida from '../../assets/img/logo_colorida.png'
 
 import './index.css'
@@ -27,6 +26,7 @@ const Login = () => {
                     <Button variant="primary" type="submit" className='mt-30'>
                         Enviar
                         </Button>
+                        
                     <a href='/cadastro' style={{ marginTop: '40px' }}>Não tenho conta!</a>
 
                 </Form>
