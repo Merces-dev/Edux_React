@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
-
-// Pages
-import Login from './pages/login';
-
+import Header from './components/header';
+import Footer from './components/footer';
 
 ReactDOM.render(
   <React.StrictMode>
-  
-    <Login/>
+    
+    <Header/>
+
+
+
+    <Footer/>
+
   </React.StrictMode>,
   document.getElementById('root')
 );
