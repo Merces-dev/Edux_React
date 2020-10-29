@@ -5,12 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Login from './pages/login';
 
 import NotFound from './pages/notfound';
 
 const routing = (
   <Router>
     <Switch>
+      <Route path='/login' component ={Login}/>
       <Route component ={NotFound}/>
     </Switch>
   </Router>
