@@ -10,9 +10,6 @@ ReactDOM.render(
   <React.StrictMode>
     
     <Header/>
-
-
-
     <Footer/>
 
   </React.StrictMode>,
