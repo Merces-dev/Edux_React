@@ -9,8 +9,8 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from './pages/login';
 import NotFound from './pages/notfound';
-import Dashboard from './pages/admin/dashboard/dashboard'
-import CrudDicas from './pages/admin/crudDicas/index';
+import Dashboard from './pages/admin/dashboard/dashboard.jsx'
+import CrudDicas from './pages/admin/crudDicas/index.jsx';
 import Dicas from './pages/dicas'
 
 const routing = (

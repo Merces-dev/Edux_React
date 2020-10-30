@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {  Container, Row, Col, Card } from 'react-bootstrap';
-
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Titulo from '../../components/titulo';
