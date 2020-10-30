@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Button, Dropdown } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import LogoColorida from '../../assets/img/logo_colorida.png';

@@ -7,6 +7,7 @@ import CadastrarAluno from './pages/cadastroaluno';
 import CadastrarProfessor from './pages/cadastroprofessor';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Login from './pages/login';
 import NotFound from './pages/notfound';
 
 const routing = (
@@ -15,7 +16,8 @@ const routing = (
       <Route exact path='/' component={Home} />
         <Route path='/cadastrar' component={CadastrarAluno} />
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
-        <Route component ={NotFound}/>
+      <Route path='/login' component ={Login}/>
+      <Route component ={NotFound}/>
     </Switch>
   </Router>
 )

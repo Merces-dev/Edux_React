@@ -13,7 +13,6 @@ const Footer = () => {
                 <Nav className='d-flex flex-column navTxtImg mt-30'>
                     <Navbar.Brand href="#home"><img src={logo} className="imgfooter " alt="Edux" /></Navbar.Brand>
                     <Nav.Item > Sua plataforma de estudos online</Nav.Item>
-
                 </Nav>
 
                 <Nav className='d-flex flex-column mt-30'>
@@ -32,7 +31,7 @@ const Footer = () => {
                 </Nav>
                 <Nav className='d-flex flex-column navTxtImg mt-30'>
                     <Nav.Item>Fique Atualizado :</Nav.Item>
-                    <br/>
+                    <br />
                     <form>
                         <label>
                             <input type="text" placeholder='Seu email aqui' />
@@ -40,7 +39,7 @@ const Footer = () => {
                         <input type="submit" value="Enviar" />
                     </form>
                 </Nav>
-                
+
             </Navbar>
 
             <div className='text-center text-light bg-dark py-2'>
