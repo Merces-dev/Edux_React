@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
-import Header from './components/header';
-import Footer from './components/footer';
+
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+import NotFound from './pages/notfound';
+
+const routing = (
+  <Router>
+    <Switch>
+      <Route component ={NotFound}/>
+    </Switch>
+  </Router>
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    
-    <Header/>
-    <Footer/>
-
-  </React.StrictMode>,
+  routing,
   document.getElementById('root')
 );
 
