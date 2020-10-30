@@ -12,11 +12,11 @@ import { BrowserRouter as Router, Route, Link , Switch} from "react-router-dom";
 const routing = (
   <Router>
     <div>
-      <switch>
+      <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/cadastrar' component={CadastrarAluno} />
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
-      </switch>
+      </Switch>
     </div>
   </Router>
 )

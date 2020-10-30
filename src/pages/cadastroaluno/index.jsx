@@ -1,11 +1,13 @@
-import React from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState }  from 'react';
+import { Container, Form, Button, Dropdown } from 'react-bootstrap';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-import LogoColorida from '../../assets/img/logo_colorida.png'
-import './index.css'
+import LogoColorida from '../../assets/img/logo_colorida.png';
+import './index.css';
+
 
 const CadastrarAluno = () => {
+
     return (
         <div >
             <Header />
@@ -16,33 +18,33 @@ const CadastrarAluno = () => {
                 </div>
                 <h4>Cadastro Aluno</h4>
                 <Form className='d-flex flex-column align-items-center size-container-login '>
-                    <Form.Group    controlId="formBasicEmail" className='d-flex flex-row w-75  mt-30'>
+                    <Form.Group controlId="formBasicEmail" className='d-flex flex-row w-75  mt-30'>
                         <Form.Label className='w-25'><p>Name :</p> </Form.Label>
                         <Form.Control className='w-75' type="text" placeholder="Insira seu nome completo" required />
                     </Form.Group>
-                    
-                    <Form.Group   controlId='formBasicPassword' className='d-flex flex-row w-75  mt-30'>
+
+                    <Form.Group controlId='formBasicPassword' className='d-flex flex-row w-75  mt-30'>
                         <Form.Label className='w-25'><p>Email :</p></Form.Label>
                         <Form.Control className='w-75' type='email' placeholder='Insira seu email'></Form.Control>
                     </Form.Group>
 
-                    <Form.Group   controlId='formBasicPassword' className='d-flex flex-row w-75  mt-30'>
+                    <Form.Group controlId='formBasicPassword' className='d-flex flex-row w-75  mt-30'>
                         <Form.Label className='w-25'><p>Senha :</p></Form.Label>
                         <Form.Control className='w-75' type='password' placeholder='Insira sua Senha'></Form.Control>
                     </Form.Group>
 
-                    <a href='/login' style={{ marginTop: '40px' }}>Já tenho conta!</a>
-                    <a href='/cadastrarprofessor' style={{ marginTop: '20px' }}>Cadastro de Professor</a>
+                        <a href='/login' style={{ marginTop: '40px' }}>Já tenho conta!</a>
+                        <a href='/cadastrarprofessor' style={{ marginTop: '20px' }}>Cadastro de Professor</a>
 
-                    <Button variant="primary" type="submit" className='mt-30'>
-                        Enviar
+                        <Button variant="primary" type="submit" className='mt-30'>
+                            Enviar
                         </Button>
-                        
-                 
+
+
 
                 </Form>
             </Container>
-            <Footer />
+                <Footer />
         </div>
 
     )
