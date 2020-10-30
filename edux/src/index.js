@@ -3,17 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
-import Header from './components/header';
-import Footer from './components/footer';
+import CrudDicas from './pages/admin/crudDicas';
+import Dicas from './pages/dicas'
+
 
 ReactDOM.render(
   <React.StrictMode>
     
-    <Header/>
-
-
-
-    <Footer/>
+   <CrudDicas />
 
   </React.StrictMode>,
   document.getElementById('root')
