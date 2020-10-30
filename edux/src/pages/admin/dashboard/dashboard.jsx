@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-import Titulo from '../../components/titulo';
+import Titulo from '../../components/tituloDashboard';
 import { Table, Container, Button } from 'react-bootstrap';
 import { url } from '../../utils/constants';
 
