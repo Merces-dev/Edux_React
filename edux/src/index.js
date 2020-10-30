@@ -12,10 +12,10 @@ import NotFound from './pages/notfound';
 const routing = (
   <Router>
     <Switch>
-      <Route component ={NotFound}/>
       <Route exact path='/' component={Home} />
         <Route path='/cadastrar' component={CadastrarAluno} />
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
+        <Route component ={NotFound}/>
     </Switch>
   </Router>
 )
