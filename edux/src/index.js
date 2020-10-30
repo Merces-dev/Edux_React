@@ -7,11 +7,13 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import NotFound from './pages/notfound';
+import Dashboard from './pages/admin/dashboard'
 
 const routing = (
   <Router>
     <Switch>
-      <Route component ={NotFound}/>
+      <Route path='/dasd' component ={NotFound}/>
+      <Route path='/admin/dashboard' component={Dashboard} />
     </Switch>
   </Router>
 )
