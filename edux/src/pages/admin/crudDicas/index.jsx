@@ -3,7 +3,7 @@ import { Container, Form, Button, Card, Table } from 'react-bootstrap';
 
 import Header from '../../../components/header';
 import Footer from '../../../components/footer';
-import Titulo from '../../../components/titulo';
+import Titulo from '../../../components/tituloDica';
 import {url} from '../../../utils/constants';
 
 const CrudDicas = () => {

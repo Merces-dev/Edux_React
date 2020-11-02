@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from './pages/login';
 import NotFound from './pages/notfound';
-import Dashboard from './pages/admin/dashboard/';
+import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
 
@@ -21,8 +21,8 @@ const routing = (
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
       <Route path='/login' component ={Login}/>
       <Route path='/admin/dashboard' component={Dashboard} />
-      <Route path='/admin/dashboard/cruddicas' component={CrudDicas} />
-      <Route path='/admin/dashboard/dicas' component={Dicas} />
+      <Route path='/admin/crudDicas' component={CrudDicas} />
+      <Route path='/dicas' component={Dicas} />
       <Route component ={NotFound}/>
     </Switch>
   </Router>
