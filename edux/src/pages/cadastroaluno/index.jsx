@@ -19,7 +19,7 @@ const CadastrarAluno = () => {
                 <h4>Cadastro Aluno</h4>
                 <Form className='d-flex flex-column align-items-center size-container-login '>
                     <Form.Group controlId="formBasicEmail" className='d-flex flex-row w-75  mt-30'>
-                        <Form.Label className='w-25'><p>Name :</p> </Form.Label>
+                        <Form.Label className='w-25'><p>Nome :</p> </Form.Label>
                         <Form.Control className='w-75' type="text" placeholder="Insira seu nome completo" required />
                     </Form.Group>
 
