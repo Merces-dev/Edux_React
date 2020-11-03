@@ -13,6 +13,30 @@ import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
 
+
+
+const RotaAluno = () =>{
+  return(
+    <Route
+      render = {
+        console.log('')
+      }
+    />
+  )
+};
+const RotaProfessor = () =>{
+  return(
+    <Route
+      render = {
+        console.log('')
+      }
+    />
+  )
+};
+
+
+
+
 const routing = (
   <Router>
     <Switch>
