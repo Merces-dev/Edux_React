@@ -1,0 +1,28 @@
+.imgfooter {
+  float: left !important;
+  margin-top: 10px !important;
+  width: 110px;
+}
+
+.navTxtImg {
+  margin-left: 30px !important;
+}
+
+
+@media (max-width: 550px){
+  .navTxtImg{
+    margin-left: 0 !important;
+  }
+  .align{
+    align-items: flex-start;
+  }
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
+  .mt-30{
+    margin-top: 30px;
+  }
+  
+
+}

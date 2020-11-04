@@ -1,0 +1,27 @@
+html,
+.form-height {
+  height: 100%;
+}
+.aligntext{
+    text-align: center;
+}
+.imglogin {
+    margin-top: 25px !important;
+    width: 150px;
+  }
+.size-container-login{
+      width: 400px;
+      height: 500px;
+}
+.mt-30{
+    margin-top: 30px;
+}
+
+@media (max-width: 550px){
+  .size-container-login{
+    width: 350px;
+  }
+
+}
+
+

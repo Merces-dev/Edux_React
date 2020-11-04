@@ -1,0 +1,9 @@
+.mr-auto{
+  color: black;
+}
+.nav-logo {
+    float: left !important;
+    margin-left: 30px !important;
+    margin-top: 5px !important;
+    width: 100px;
+  }
