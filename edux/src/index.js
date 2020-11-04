@@ -12,6 +12,7 @@ import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
+import Curso from './pages/admin/curso';
 
 const routing = (
   <Router>
@@ -21,6 +22,7 @@ const routing = (
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
       <Route path='/login' component ={Login}/>
       <Route path='/admin/dashboard' component={Dashboard} />
+      <Route path='/admin/curso' component={Curso} />
       <Route path='/admin/crudDicas' component={CrudDicas} />
       <Route path='/dicas' component={Dicas} />
       <Route component ={NotFound}/>
