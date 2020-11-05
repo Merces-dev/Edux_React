@@ -7,7 +7,12 @@ import CadastrarAluno from './pages/cadastroaluno';
 import CadastrarProfessor from './pages/cadastroprofessor';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+<<<<<<< HEAD
 import Login from './pages/login';
+=======
+import Ranking from './pages/ranking'
+
+>>>>>>> origin/dashboard
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
@@ -46,10 +51,14 @@ const routing = (
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
       <Route path='/login' component ={Login}/>
       <Route path='/admin/dashboard' component={Dashboard} />
+<<<<<<< HEAD
       <Route path='/admin/curso' component={Curso} />
       <Route path='/admin/crudDicas' component={CrudDicas} />
       <Route path='/dicas' component={Dicas} />
       <Route component ={NotFound}/>
+=======
+      <Route path='/ranking' component={Ranking} />
+>>>>>>> origin/dashboard
     </Switch>
   </Router>
 )
