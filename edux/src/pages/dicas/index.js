@@ -14,7 +14,7 @@ const Dicas = () => {
     },[])
 
     const listarDicas = () => {
-        fetch(`${url}/dicas`)
+        fetch(`${url}/dica`)
         .then(response => response.json())
         .then(dados => {
             setDicas(dados.data);

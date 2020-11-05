@@ -5,12 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 import CrudDicas from './pages/admin/crudDicas';
 import Dicas from './pages/dicas'
+import Postagens from './pages/postagens'
 
 
 ReactDOM.render(
   <React.StrictMode>
     
-   <CrudDicas />
+   <Postagens />
 
   </React.StrictMode>,
   document.getElementById('root')

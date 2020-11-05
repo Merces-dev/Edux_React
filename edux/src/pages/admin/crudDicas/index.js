@@ -11,7 +11,7 @@ const CrudDicas = () => {
     const [ id, setId ] = useState(0);
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [ urlImagem, setUrlImagem] = useState('');
+    const [ Imagem, setImagem] = useState('');
     const [dicas, setDicas] = useState([]);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const CrudDicas = () => {
 
    
    const listarDicas = () => {
-        fetch(`${url}/Dica`)
+        fetch(`${url}/dica`)
         .then(response => response.json())
         .then(dados => {
             setDicas(dados.data);
@@ -30,10 +30,11 @@ const CrudDicas = () => {
         .catch(err => console.error(err));
     }
 
+
     const uploadFile = (event) => {
         event.preventDefault()
 
-
+     
         console.log(event);
 
         let formdata = new FormData();
@@ -41,34 +42,35 @@ const CrudDicas = () => {
         
         fetch(`${url}/upload`,
         {
-            method : 'POST',
+            method : 'POST',    
             body : formdata 
         })
         .then(response => response.json())
         .then(data =>{
-            setUrlImagem(data.url);
+            setImagem(data.url);
         })
         .catch(err => console.error(err))
     }
+
 
     const salvar = ( event) => {
         event.preventDefault();
 
         const dica = {
             titulo : titulo,
-            urlImagem : urlImagem,
+            Imagem : Imagem,
             descricao : descricao
         }
 
         let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/dicas` :  `${url}/dicas/${id}`);
+        let urlRequest = (id === 0 ? `${url}/dica` :  `${url}/dica/${id}`);
 
         fetch(urlRequest, {
             method : method,
             body : JSON.stringify(dica),
             headers : {
                 'content-type' : 'application/json',
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+                // Authorization admin
             }
         })
         .then(response => response.json())
@@ -84,16 +86,16 @@ const CrudDicas = () => {
         event.preventDefault();
 
         fetch(url + '/Dica/' + event.target.value, {
-            method : 'GET',
+            method : 'PUT',
             headers : {
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+                // Authorization admin
             }
         })
         .then(response => response.json())
         .then(dado => {
             setId(dado.data.id);
             setTitulo(dado.data.titulo);
-            setUrlImagem(dado.data.urlImagem);
+            setImagem(dado.data.Imagem);
             setDescricao(dado.data.descricao);
         })
     }
@@ -104,7 +106,7 @@ const CrudDicas = () => {
         fetch(url + '/Dica/' + event.target.value,{
             method : 'DELETE',
             headers : {
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+                // Authorization admin
             }
         })
         .then(response => response.json())
@@ -118,7 +120,7 @@ const CrudDicas = () => {
     const limparCampos = () => {
         setId(0);
             setTitulo('');
-            setUrlImagem('');
+            setImagem('');
             setDescricao('');
     }
 
@@ -141,12 +143,12 @@ const CrudDicas = () => {
                             </Form.Group>    
 
                             <Form.Group controlId="formImagem">
-                                <Form.File id="fileEvento" label="Imagem da dica" onChange={event => uploadFile(event)} />
-                                { urlImagem && <img src={urlImagem} style={{ width : '160px'}} />}
+                                <Form.File id="fileDica" label="Imagem da dica" onChange={event => uploadFile(event)} />
+                                { Imagem && <img src={Imagem} style={{ width : '160px'}} />}
                             </Form.Group>
                             
                             <Form.Group controlId="formDescricao">
-                                <Form.Label>Descrição</Form.Label>
+                                <Form.Label >Descrição</Form.Label>
                                 <Form.Control as="textarea" rows={3} value={descricao} onChange={event => setDescricao(event.target.value)} />
                             </Form.Group>
                               
@@ -165,23 +167,7 @@ const CrudDicas = () => {
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {
-                                    dicas.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td><img src={item.urlImagem} style={{ width : '120px'}} /></td>
-                                            <td>{item.titulo}</td>
-                                            <td>{item.descricao}</td>
-                                            <td>
-                                                <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>
-                                                <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '30px'}} onClick={ event => remover(event)}>Remover</Button>
-                                            </td>
-                                        </tr>
-                                    )
-                                    })
-                                }
-                            </tbody>
+                         
                         </Table>
                         </Card.Body>
                     </Card>
