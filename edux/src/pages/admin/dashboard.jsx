@@ -20,6 +20,7 @@ const Dashboard = () => {
     
     const listar = () => {
         fetch(url + '/usuario')
+            
             .then(response => response.json())
             .then(data => {
                 setUsuarios(data)
@@ -28,7 +29,7 @@ const Dashboard = () => {
             })
             .catch(err => console.error(err));
         
-    }
+        }
 
 
     const editar = (event) => {
@@ -50,7 +51,8 @@ const Dashboard = () => {
         event.preventDefault();
 
         fetch(`${url}/usuario/${event.target.value}`, {
-            method : 'DELETE'
+            method : 'DELETE',
+
         })
         .then(response => response.json())
         .then(dados => {
@@ -65,9 +67,11 @@ const Dashboard = () => {
         event.preventDefault();
 
         const usuario = {
+            idUsuario : id,
             nome : nome,
-            pontuacao : pontuacao
+            pontuacao : pontuacao,
         }
+
 
 
         fetch(`${url}/usuario/${id}`, {
@@ -83,6 +87,7 @@ const Dashboard = () => {
 
             listar();
         })
+        .catch(err => console.error(err))
 
     }
 
@@ -98,7 +103,7 @@ const Dashboard = () => {
 
         <div>
         <Header />
-        <Titulo titulo="Dashboard" chamada="Gerencie os alunos" />
+        <Titulo titulo="Dashboard" chamada="Gerencie a pontuação dos alunos" />
 
         
 

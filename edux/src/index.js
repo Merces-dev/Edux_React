@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Ranking from './pages/ranking'
 
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard'
@@ -14,6 +15,7 @@ const routing = (
     <Switch>
       <Route path='/dasd' component ={NotFound}/>
       <Route path='/admin/dashboard' component={Dashboard} />
+      <Route path='/ranking' component={Ranking} />
     </Switch>
   </Router>
 )
