@@ -106,6 +106,7 @@ const CrudObjetivos  = () => {
             alert('Objetivo removida');
 
             listarObjetivos();
+            
         })
     }
 
@@ -117,7 +118,7 @@ const CrudObjetivos  = () => {
     
         return(
             <div>
-                
+
                 <Header />
                 <Container>
 
