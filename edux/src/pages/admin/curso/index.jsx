@@ -6,8 +6,8 @@ import TituloPag from '../../../components/tituloDica';
 import { url } from '../../../utils/constants';
 
 const CrudCurso = () => {
-    const [IdCurso, setIdCurso] = useState(0);
-    const [IdInstituicoes, setIdInstituicoes] = useState('');
+    const [idCurso, setidCurso] = useState(0);
+    const [idInstituicao, setidInstituicao] = useState('');
     const [Titulo, setTitulo] = useState('');
     const [instituicoes, setInstituicoes] = useState([]);
     const [cursos, setCursos] = useState([]);
@@ -45,12 +45,12 @@ const CrudCurso = () => {
 
         const curso = {
             Titulo : Titulo,
-            IdInstituicoes : IdInstituicoes
+            idInstituicao : idInstituicao
            
         }
 
-        let method = (IdCurso === 0 ? 'POST' : 'PUT');
-        let urlRequest = (IdCurso === 0 ? `${url}/curso` : `${url}/curso/${IdCurso}`);
+        let method = (idCurso === 0 ? 'POST' : 'PUT');
+        let urlRequest = (idCurso === 0 ? `${url}/curso` : `${url}/curso/${idCurso}`);
 
         fetch(urlRequest, {
             method: method,
@@ -80,9 +80,9 @@ const CrudCurso = () => {
         })
             .then(response => response.json())
             .then(dado => {
-                setIdCurso(dado.data.id);
+                setidCurso(dado.data.id);
                 setTitulo(dado.data.titulo);
-                setIdInstituicoes(dado.data.id)
+                setidInstituicao(dado.data.id)
               
             })
     }
@@ -105,9 +105,9 @@ const CrudCurso = () => {
     }
 
     const limparCampos = () => {
-        setIdCurso(0);
+        setidCurso(0);
         setTitulo('');
-        setIdInstituicoes('');
+        setidInstituicao('');
 
     }
 
@@ -127,7 +127,7 @@ const CrudCurso = () => {
 
                             <Form.Group controlId="formInstituicoes">
                                 <Form.Label>Instituicoes</Form.Label>
-                                <Form.Control as="select" value={IdInstituicoes} onChange={event => setIdInstituicoes(event.target.value)}>
+                                <Form.Control as="select" value={idInstituicao} onChange={event => setidInstituicao(event.target.value)}>
                                     <option value={0}>Selecione</option>
                                     {
                                         instituicoes.map((item, index) => {
