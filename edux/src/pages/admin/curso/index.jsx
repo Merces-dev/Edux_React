@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Form, Button, Card, Table } from 'react-bootstrap';
 import Header from '../../../components/header';
 import Footer from '../../../components/footer';
-import TituloPag from '../../../components/tituloDica';
+import TituloPag from '../../../components/titulo';
 import { url } from '../../../utils/constants';
 
 const CrudCurso = () => {

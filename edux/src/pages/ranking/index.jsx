@@ -10,6 +10,7 @@ const Ranking = () => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
+        
         listar();
     }, []);
 
