@@ -12,6 +12,7 @@ const Objetivos = () => {
         listarObjetivos();
     }, [])
 
+    
     const listarObjetivos = () => {
         fetch(`${url}/objetivos`)
             .then(response => response.json())

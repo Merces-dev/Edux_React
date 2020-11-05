@@ -31,6 +31,7 @@ const Turma  = () => {
         event.preventDefault()
     }
 
+    
     return(
         <div>
             <Header />
@@ -110,8 +111,28 @@ const Turma  = () => {
                 <Form>
 
                 <Form.Group controlId="formNome">
+                    <Form.Label>Nova Turma</Form.Label>
+                    <Form.Control type="text" placeholder="Nome da nova turma" />
+                </Form.Group>
+                <button type="submit" className="btn btn-success" >Salvar</button>
+
+                </Form>
+
+                <Form>
+
+                <Form.Group controlId="formNome">
                     <Form.Label>Novo Aluno</Form.Label>
                     <Form.Control type="text" placeholder="Didite o nome do aluno" />
+                </Form.Group>
+                <Form.Group controlId="formTurmas">
+                    <Form.Label> Selecione a turma</Form.Label>
+                    <Form.Control as="select">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    </Form.Control>
                 </Form.Group>
                 <button type="submit" className="btn btn-success" >Salvar</button>
 
