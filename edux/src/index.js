@@ -14,6 +14,30 @@ import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
 import Curso from './pages/admin/curso';
 
+
+
+const RotaAluno = () =>{
+  return(
+    <Route
+      render = {
+        console.log('')
+      }
+    />
+  )
+};
+const RotaProfessor = () =>{
+  return(
+    <Route
+      render = {
+        console.log('')
+      }
+    />
+  )
+};
+
+
+
+
 const routing = (
   <Router>
     <Switch>
