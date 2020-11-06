@@ -40,7 +40,7 @@ const Login = () => {
                 if (user.role === 'Admin')
                     history.push('/admin/dashboard');
                 else
-                    history.push('/dicas');
+                    history.push('/perfil');
             })
             .catch(err => console.error(err));
     };

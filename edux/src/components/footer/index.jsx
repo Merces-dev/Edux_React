@@ -17,7 +17,7 @@ const Footer = () => {
             }
         })
             .then(response => {
-                if (response.ok) {
+                if (response.ok && email !== "") {
                     alert('Email Cadastrado')
                     return response.json();
                 }

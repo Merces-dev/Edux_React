@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import jwt_decode from 'jwt-decode'
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
 
 //Páginas
@@ -16,10 +17,32 @@ import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
+import Timeline from './pages/timeline';
 import Curso from './pages/admin/curso';
 
+const token = localStorage.getItem('token-edux') 
 
-
+const RotaAluno = ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = {
+      props => 
+      token === null ?
+      <Redirect to={{pathname:'/login', state:{from : props.location}}}/>:
+    <Component {...props}/>
+    }
+  />
+);
+const RotaPrivada = ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = { props => 
+      token !== null && jwt_decode(token).role === 'Admin' ?
+        <Component {...props} /> :
+        <Redirect to={{pathname : '/login', state :{from : props.location}}} /> 
+    }
+  />
+);
 
 
 
@@ -30,11 +53,12 @@ const routing = (
         <Route path='/cadastro' component={CadastrarAluno} />
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
       <Route path='/login' component ={Login}/>
-      <Route path='/admin/dashboard' component={Dashboard} />
-      <Route path='/admin/curso' component={Curso} />
-      <Route path='/admin/crudDicas' component={CrudDicas} />
-      <Route path='/dicas' component={Dicas} />
-      <Route path='/ranking' component={Ranking} />
+      <RotaPrivada path='/admin/dashboard' component={Dashboard} />
+      <RotaPrivada path='/admin/crudCursos' component={Curso} />
+      <RotaPrivada path='/admin/crudDicas' component={CrudDicas} />
+      <RotaAluno path='/dicas' component={Dicas} />
+      <RotaAluno path='/timeline' component={Timeline} />
+      <RotaAluno path='/ranking' component={Ranking} />
        <Route component ={NotFound}/>
     </Switch>
   </Router>
