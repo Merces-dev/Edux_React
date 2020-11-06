@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import logo from '../../assets/img/logo-branco.png';
 import '../footer/index.css';
 
-
-
 const Footer = () => {
+    const [email, setEmail] = useState('');
+    const cadNewsletter = (event) => {
+        event.preventDefault();
+        fetch('http://localhost:5000/api/newsletter', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Email Cadastrado')
+                    return response.json();
+                }
+                alert('Dados Inválidos, tente novamente')
+            })
+    };
     return (
         <div className=' footer '>
             <br />
@@ -32,11 +50,12 @@ const Footer = () => {
                 <Nav className='d-flex flex-column navTxtImg mt-30'>
                     <Nav.Item>Fique Atualizado :</Nav.Item>
                     <br />
-                    <form>
+    
+                    <form onSubmit={event => cadNewsletter(event)}>
                         <label>
-                            <input type="text" placeholder='Seu email aqui' />
+                            <input type="email" onChange={ event => setEmail(event.target.value)}  placeholder='Seu email aqui' />
                         </label>
-                        <input type="submit" value="Enviar" />
+                        <input type="submit"  value="Enviar" />
                     </form>
                 </Nav>
 

@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+
+//Páginas
 import Home from './pages/home';
 import CadastrarAluno from './pages/cadastroaluno';
 import CadastrarProfessor from './pages/cadastroprofessor';
-import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from './pages/login';
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
@@ -14,25 +17,6 @@ import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
 
 
-
-const RotaAluno = () =>{
-  return(
-    <Route
-      render = {
-        console.log('')
-      }
-    />
-  )
-};
-const RotaProfessor = () =>{
-  return(
-    <Route
-      render = {
-        console.log('')
-      }
-    />
-  )
-};
 
 
 
