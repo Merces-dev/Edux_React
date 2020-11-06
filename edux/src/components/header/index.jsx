@@ -27,7 +27,7 @@ const Header = () => {
     }
     else if (jwt_decode(token).role === 'Admin') {
       return (
-        <Nav >
+        <Nav className='mg-r' >
           <Nav.Link className='hover' href="/admin/dashboard">Dashboard</Nav.Link>
           <Nav.Link className='hover' href="/admin/cruddicas">Crud Dicas</Nav.Link>
           <Nav.Link className='hover' href="/admin/crudcurso">Crud Cursos</Nav.Link>
@@ -40,7 +40,7 @@ const Header = () => {
     }
     else {
       return (
-        <Nav>
+        <Nav  className='mg-r'>
           <Nav.Link className='hover' href="/timeline">Timeline</Nav.Link>
           <Nav.Link className='hover' href="/dicas">Dicas</Nav.Link>
           <Nav.Link className='hover' href="/cursos">Cursos</Nav.Link>
@@ -63,7 +63,7 @@ const Header = () => {
   return (
     <div>
       <Navbar collapseOnSelect  className="d-flex justify-content-around"  expand="lg" bg="success" variant="dark">
-        <Navbar.Brand href="/"><img src={logo} className="nav-logo" alt="Edux" /></Navbar.Brand>
+        <Navbar.Brand  style={{marginLeft: '80px'}}href="/"><img src={logo} className="nav-logo" alt="Edux" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">

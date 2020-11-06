@@ -11,3 +11,9 @@
 .hover:hover{
   text-shadow: rgb(135, 206, 125) 0.1em 0.1em 0.2em
 }
+.mg-r{
+  margin-right: 80px;
+}
+.mg-l{
+  margin-left: 80px;
+}
