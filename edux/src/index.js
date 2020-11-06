@@ -12,6 +12,7 @@ import CadastrarAluno from './pages/cadastroaluno';
 import CadastrarProfessor from './pages/cadastroprofessor';
 import Login from './pages/login';
 import Ranking from './pages/ranking'
+import Perfil from './pages/perfil'
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
@@ -30,12 +31,14 @@ const routing = (
         <Route path='/cadastrar' component={CadastrarAluno} />
         <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
       <Route path='/login' component ={Login}/>
+      <Route path='/perfil' component ={Perfil}/>
       <Route path='/admin/dashboard' component={Dashboard} />
       <Route path='/admin/curso' component={Curso} />
       <Route path='/admin/crudDicas' component={CrudDicas} />
       <Route path='/dicas' component={Dicas} />
-      <Route component ={NotFound}/>
       <Route path='/ranking' component={Ranking} />
+      <Route component ={NotFound}/>
+
     </Switch>
   </Router>
 )
