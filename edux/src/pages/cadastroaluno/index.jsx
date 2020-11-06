@@ -3,8 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import LogoColorida from '../../assets/img/logo_colorida.png';
-import './index.css';
-
+import '../cadastroaluno/index.css';
 
 const CadastrarAluno = () => {
 
@@ -33,18 +32,17 @@ const CadastrarAluno = () => {
                         <Form.Control className='w-75' type='password' placeholder='Insira sua Senha'></Form.Control>
                     </Form.Group>
 
-                        <a href='/login' style={{ marginTop: '40px' }}>Já tenho conta!</a>
-                        <a href='/cadastrarprofessor' style={{ marginTop: '20px' }}>Cadastro de Professor</a>
 
-                        <Button variant="primary" type="submit" className='mt-30'>
-                            Enviar
+                    <a className="botao" href='/login' style={{ marginTop: '-09px' }}>Já tenho conta!</a>
+                    <a className="botao" href='/cadastrarprofessor' style={{ marginTop: '20px' }}>Cadastro de Professor</a>
+
+                    <Button variant="primary" type="submit" className='mt-30'>
+                        Enviar
                         </Button>
-
-
 
                 </Form>
             </Container>
-                <Footer />
+            <Footer />
         </div>
 
     )

@@ -31,7 +31,7 @@ const CadastrarProfessor = () => {
                         <Form.Control className='w-75' type='password' placeholder='Insira sua Senha'></Form.Control>
                     </Form.Group>
 
-                    <a href='/login' style={{ marginTop: '40px' }}>Já tenho conta!</a>
+                    <a href='/login' style={{ marginTop: '-09px' }}>Já tenho conta!</a>
                     <a href='/cadastrar' style={{ marginTop: '20px' }}>Cadastro de Aluno</a>
 
                     <Button variant="primary" type="submit" className='mt-30'>

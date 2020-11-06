@@ -17,9 +17,10 @@ html,
     margin-top: 20px;
 }
 
-@media (max-width: 550px){
+
+@media (max-width: 425px){
   .size-container-login{
-    width: 350px;
+    width: 280px;
   }
 
 }
