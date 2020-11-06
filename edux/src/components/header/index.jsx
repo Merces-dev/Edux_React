@@ -32,7 +32,7 @@ const Header = () => {
           <Nav.Link className='hover' href="/admin/cruddicas">Crud Dicas</Nav.Link>
           <Nav.Link className='hover' href="/admin/crudcurso">Crud Cursos</Nav.Link>
           <NavDropdown className='hover' title={jwt_decode(token).nameid}>
-              <NavDropdown.Item onClick={event => sair(event)}>Sair da conta</NavDropdown.Item >
+            <NavDropdown.Item onClick={event => sair(event)}>Sair da conta</NavDropdown.Item >
           </NavDropdown>
         </Nav>
       )
@@ -40,9 +40,10 @@ const Header = () => {
     else {
       return (
         <Nav>
+          <Nav.Link className='hover' href="/timeline">Timeline</Nav.Link>
           <Nav.Link className='hover' href="/dicas">Dicas</Nav.Link>
           <Nav.Link className='hover' href="/cursos">Cursos</Nav.Link>
-          <Nav.Link className='hover' href="/timeline">Timeline</Nav.Link>
+          <Nav.Link className='hover' href="/ranking">Ranking</Nav.Link>
           <Nav.Link className='hover' href="/objetivos">Objetivos</Nav.Link>
 
 
@@ -60,7 +61,7 @@ const Header = () => {
   }
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="success" variant="dark">
+      <Navbar collapseOnSelect  className="d-flex justify-content-around"  expand="lg" bg="success" variant="dark">
         <Navbar.Brand href="/"><img src={logo} className="nav-logo" alt="Edux" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
