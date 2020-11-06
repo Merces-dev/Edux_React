@@ -7,3 +7,7 @@
     margin-top: 5px !important;
     width: 100px;
   }
+
+.hover:hover{
+  text-shadow: rgb(135, 206, 125) 0.1em 0.1em 0.2em
+}
