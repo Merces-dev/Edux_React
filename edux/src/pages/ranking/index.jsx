@@ -17,15 +17,12 @@ const Ranking = () => {
     const listar = () => {
         fetch(url + '/usuario')
 
-            
-            
             .then(response => response.json())
             .then(data => {
                 setUsuarios(data)
 
             })
             .catch(err => console.error(err));
-        
         }
     
     return(
