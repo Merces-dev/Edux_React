@@ -50,8 +50,8 @@ const routing = (
       <Route path='/admin/curso' component={Curso} />
       <Route path='/admin/crudDicas' component={CrudDicas} />
       <Route path='/dicas' component={Dicas} />
-      <Route component ={NotFound}/>
       <Route path='/ranking' component={Ranking} />
+       <Route component ={NotFound}/>
     </Switch>
   </Router>
 )
