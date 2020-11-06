@@ -21,7 +21,7 @@ const Header = () => {
       return (
         <Nav>
           <Nav.Link className='hover' href="/login">Login</Nav.Link>
-          <Nav.Link className='hover' href="/cadastro">Cadastrar</Nav.Link>
+          <Nav.Link className='hover' href="/cadastrar">Cadastrar</Nav.Link>
         </Nav>
       );
     }
@@ -31,6 +31,7 @@ const Header = () => {
           <Nav.Link className='hover' href="/admin/dashboard">Dashboard</Nav.Link>
           <Nav.Link className='hover' href="/admin/cruddicas">Crud Dicas</Nav.Link>
           <Nav.Link className='hover' href="/admin/crudcurso">Crud Cursos</Nav.Link>
+          <Nav.Link className='hover' href="/admin/crudobjetivos">Crud Objetivos</Nav.Link>
           <NavDropdown className='hover' title={jwt_decode(token).nameid}>
             <NavDropdown.Item onClick={event => sair(event)}>Sair da conta</NavDropdown.Item >
           </NavDropdown>

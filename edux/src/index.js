@@ -16,6 +16,7 @@ import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
+import Timeline from './pages/timeline';
 import Curso from './pages/admin/curso';
 
 
@@ -34,6 +35,7 @@ const routing = (
       <Route path='/admin/curso' component={Curso} />
       <Route path='/admin/crudDicas' component={CrudDicas} />
       <Route path='/dicas' component={Dicas} />
+      <Route path='/timeline' component={Timeline} />
       <Route path='/ranking' component={Ranking} />
        <Route component ={NotFound}/>
     </Switch>
