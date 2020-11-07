@@ -3,6 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { url } from '../../utils/constants';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
+import jwt_decode from "jwt-decode";
 import LogoColorida from '../../assets/img/logo_colorida.png';
 import { useHistory } from "react-router-dom";
 import '../cadastroaluno/index.css';
@@ -13,8 +14,6 @@ const CadastrarAluno = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [idPerfil, setIdPerfil] = useState(0);
-    const [pontuacao, setPontuacao] = useState('');
-    const [idUsuario, setIdUsuario] = useState(0);
     const [perfil, setPerfil] = useState([])
 
     const history = useHistory();
@@ -36,17 +35,13 @@ const CadastrarAluno = () => {
     const salvar = (event) => {
         event.preventDefault();
 
-        fetch((url + 'usuario'), {
+        fetch(`${url}/usuario`, {
             method: 'POST',
             body: JSON.stringify({
                 nome: nome,
                 email: email,
                 senha: senha,
-                pontuacao : pontuacao,
                 idPerfil: idPerfil,
-                idUsuario : idUsuario
-            
-
             }),
             headers: {
                 'content-type': 'application/json'
@@ -56,7 +51,7 @@ const CadastrarAluno = () => {
                 if (response.ok) {
                     console.log(response.json());
 
-                    alert('Usuário cadastrado!');
+                    alert('Usuario cadastrado com sucesso! Por favor efetue o login');
 
                     history.push('/login')
                 }
@@ -83,16 +78,16 @@ const CadastrarAluno = () => {
                 <h4>Cadastro</h4>
                 <small>Insira os dados abaixo</small>
 
-                <Form className='d-flex flex-column align-items-center size-container-login' >
+                <Form className='d-flex flex-column align-items-center size-container-login' onSubmit={event => salvar(event)} >
 
-                    <Form.Group controlId="formBasicEmail" className='d-flex flex-row w-75  mt-30'>
+                    <Form.Group controlId="formBasicName" className='d-flex flex-row w-75  mt-30'>
                         <Form.Label className='w-25'><p>Nome :</p> </Form.Label>
                         <Form.Control className='w-75' type="text" placeholder="Insira seu nome completo" value={nome} onChange={event => setNome(event.target.value)} required />
                     </Form.Group>
 
                     <Form.Group controlId='formBasicEmail' className='d-flex flex-row w-75  mt-30'>
                         <Form.Label className='w-25' style={{ marginTop: '-25px' }} ><p>Email :</p></Form.Label>
-                        <Form.Control className='w-75'  style={{ marginTop: '-25px' }} type='email' placeholder="Insira seu email" value={email} onChange={event => setEmail(event.target.value)} required />
+                        <Form.Control className='w-75' style={{ marginTop: '-25px' }} type='email' placeholder="Insira seu email" value={email} onChange={event => setEmail(event.target.value)} required />
                     </Form.Group>
 
                     <Form.Group controlId='formBasicPassword' className='d-flex flex-row w-75  mt-30'>
@@ -118,7 +113,7 @@ const CadastrarAluno = () => {
 
                     <a className="botao" href='/login' style={{ marginTop: '-09px' }}>Já tenho conta!</a>
 
-                    <Button variant="primary" type="submit" className='mt-30' onSubmit={event => salvar(event)}>
+                    <Button variant="primary" type="submit" className='mt-30' >
                         Enviar
                     </Button>
 

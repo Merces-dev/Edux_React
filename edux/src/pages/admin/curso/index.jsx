@@ -80,25 +80,24 @@ const CrudCurso = () => {
     const salvar = (event) => {
         event.preventDefault();
 
-       
-
-        let method = (idCurso === 0 ? 'POST' : 'PUT')
-        let urlRequest = (idCurso === 0 ? `${url}/Curso` : `${url}/Curso/${idCurso}`)
-
-        fetch(urlRequest, {
-            method: method,
-            body: JSON.stringify(curso),
+        fetch(`${url}/curso`, {
+            method: 'POST',
+            body: JSON.stringify({
+                titulo: titulo,
+                idInstituicao: idInstituicao
+            }),
             headers: {
                 'content-type': 'application/json',
                 'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-            .then(response => response.json())
-            .then(dados => {
-                alert('Curso salvo!');
+        .then(response => {
+            if (response.ok) {
+                console.log(response.json());
 
-                listarCursos();
-            })
+                alert('Curso cadastrado com sucesso!');
+            }
+        })
     }
 
     const limparCampos = () => {

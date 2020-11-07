@@ -10,7 +10,6 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 //Páginas
 import Home from './pages/home';
 import CadastrarAluno from './pages/cadastroaluno';
-import CadastrarProfessor from './pages/cadastroprofessor';
 import Login from './pages/login';
 import Ranking from './pages/ranking'
 import NotFound from './pages/notfound';
@@ -50,8 +49,7 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={Home} />
-        <Route path='/cadastro' component={CadastrarAluno} />
-        <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
+        <Route path='/cadastrar' component={CadastrarAluno} />
       <Route path='/login' component ={Login}/>
       <RotaPrivada path='/admin/dashboard' component={Dashboard} />
       <RotaPrivada path='/admin/crudCursos' component={Curso} />
