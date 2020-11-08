@@ -46,7 +46,7 @@ const Header = () => {
           <Nav.Link className='hover' href="/objetivos">Objetivos</Nav.Link>
 
 
-          <NavDropdown className='hover' title={jwt_decode(token).nameid} >
+          <NavDropdown className='hover' title={jwt_decode(token).family_name} >
             <NavDropdown.Item href="/perfil">Perfil do Aluno </NavDropdown.Item >
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={event => sair(event)}>Sair da conta</NavDropdown.Item >
