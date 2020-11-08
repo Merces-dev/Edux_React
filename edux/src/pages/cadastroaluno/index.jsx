@@ -58,6 +58,8 @@ const CadastrarAluno = () => {
             })
     }
 
+    
+
     const limparCampos = () => {
         setIdPerfil(0);
         setNome('');

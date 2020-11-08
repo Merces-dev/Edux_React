@@ -17,7 +17,7 @@ import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
 import Dicas from './pages/dicas';
 import Timeline from './pages/timeline';
-import Curso from './pages/admin/curso';
+import Curso from './pages/admin/crudCurso';
 
 const token = localStorage.getItem('token-edux') 
 

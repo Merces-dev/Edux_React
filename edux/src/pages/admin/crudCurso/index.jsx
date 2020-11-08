@@ -77,12 +77,16 @@ const CrudCurso = () => {
         idInstituicao: idInstituicao
     }
 
-    const salvar = (event) => {
-        event.preventDefault();
+    const salvar = (curso) => {
 
-        fetch(`${url}/curso`, {
-            method: 'POST',
+        let method = (idCurso === 0 ? 'POST' : 'PUT');
+        let urlRequest = (idCurso === 0 ? url + '/curso' : url + '/curso/' + idCurso);
+
+
+        fetch(urlRequest, {
+            method: method,
             body: JSON.stringify({
+                idCurso : idCurso,
                 titulo: titulo,
                 idInstituicao: idInstituicao
             }),
