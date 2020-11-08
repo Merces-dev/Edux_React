@@ -22,6 +22,20 @@ import Curso from './pages/admin/crudCurso';
 
 const token = localStorage.getItem('token-edux') 
 
+// Somente para quem nao tem cadastro
+const RotaNaoCadastrado= ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = {
+      props => 
+      token !== null ?
+      <Redirect to={{pathname:'/', state:{from : props.location}}}/>:
+    <Component {...props}/>
+    }
+  />
+);
+// Somente para alunos
+
 const RotaAluno = ({component : Component, ...rest}) => (
   <Route
     {...rest}
@@ -33,6 +47,8 @@ const RotaAluno = ({component : Component, ...rest}) => (
     }
   />
 );
+// Somente para professores
+
 const RotaPrivada = ({component : Component, ...rest}) => (
   <Route
     {...rest}
@@ -50,8 +66,8 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={Home} />
-      <Route path='/cadastrar' component={CadastrarAluno} />
-      <Route path='/login' component ={Login}/>
+      <RotaNaoCadastrado path='/cadastrar' component={CadastrarAluno} />
+      <RotaNaoCadastrado path='/login' component ={Login}/>
       <RotaPrivada path='/admin/dashboard' component={Dashboard} />
       <RotaPrivada path='/admin/crudCursos' component={Curso} />
       <RotaPrivada path='/admin/crudDicas' component={CrudDicas} />
