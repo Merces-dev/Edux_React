@@ -1,0 +1,24 @@
+.br-15{
+    border-radius: 15px;
+}
+.imgperfil{
+    width: 90px;
+    border-radius: 50px;
+}
+.mg-p{
+    margin: 20px ;
+}
+.divPontuacao{
+    margin: 20px 50px;
+}
+
+@media (max-width: 550px){
+    h3{
+        font-size: 1.5em;
+    }
+    .divPontuacao{
+        margin: 25px 10px;
+    }
+    
+  
+  }

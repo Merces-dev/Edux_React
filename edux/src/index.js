@@ -12,6 +12,7 @@ import Home from './pages/home';
 import CadastrarAluno from './pages/cadastroaluno';
 import Login from './pages/login';
 import Ranking from './pages/ranking'
+import Perfil from './pages/perfil'
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
@@ -49,7 +50,7 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={Home} />
-        <Route path='/cadastrar' component={CadastrarAluno} />
+      <Route path='/cadastrar' component={CadastrarAluno} />
       <Route path='/login' component ={Login}/>
       <RotaPrivada path='/admin/dashboard' component={Dashboard} />
       <RotaPrivada path='/admin/crudCursos' component={Curso} />
@@ -57,6 +58,8 @@ const routing = (
       <RotaAluno path='/dicas' component={Dicas} />
       <RotaAluno path='/timeline' component={Timeline} />
       <RotaAluno path='/ranking' component={Ranking} />
+      <RotaAluno path='/perfil' component={Perfil} />
+
        <Route component ={NotFound}/>
     </Switch>
   </Router>
