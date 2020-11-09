@@ -27,8 +27,8 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={Home} />
-        <Route path='/cadastrar' component={CadastrarAluno} />
-        <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
+      <Route path='/cadastrar' component={CadastrarAluno} />
+      <Route path='/cadastrarprofessor' component={CadastrarProfessor} />
       <Route path='/login' component ={Login}/>
       <Route path='/admin/dashboard' component={Dashboard} />
       <Route path='/admin/curso' component={Curso} />
