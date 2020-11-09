@@ -12,6 +12,7 @@ import Home from './pages/home';
 import CadastrarAluno from './pages/cadastroaluno';
 import Login from './pages/login';
 import Ranking from './pages/ranking'
+import Perfil from './pages/perfil'
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
@@ -27,6 +28,20 @@ import Objetivos from './pages/objetivos';
 
 const token = localStorage.getItem('token-edux') 
 
+// Somente para quem nao tem cadastro
+const RotaNaoCadastrado= ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = {
+      props => 
+      token !== null ?
+      <Redirect to={{pathname:'/', state:{from : props.location}}}/>:
+    <Component {...props}/>
+    }
+  />
+);
+// Somente para alunos
+
 const RotaAluno = ({component : Component, ...rest}) => (
   <Route
     {...rest}
@@ -38,6 +53,8 @@ const RotaAluno = ({component : Component, ...rest}) => (
     }
   />
 );
+// Somente para professores
+
 const RotaPrivada = ({component : Component, ...rest}) => (
   <Route
     {...rest}
@@ -55,8 +72,8 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={Home} />
-        <Route path='/cadastrar' component={CadastrarAluno} />
-      <Route path='/login' component ={Login}/>
+      <RotaNaoCadastrado path='/cadastrar' component={CadastrarAluno} />
+      <RotaNaoCadastrado path='/login' component ={Login}/>
       <RotaPrivada path='/admin/dashboard' component={Dashboard} />
       <RotaPrivada path='/admin/crudCursos' component={Curso} />
       <RotaPrivada path='/admin/crudObjetivos' component={CrudObjetivos} />
