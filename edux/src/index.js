@@ -22,6 +22,7 @@ import Curso from './pages/admin/crudCurso';
 import CrudTurmas from './pages/admin/crudTurmas';
 import Cursos from './pages/cursos';
 import Perfil from './pages/perfil';
+import Objetivos from './pages/objetivos';
 
 
 const token = localStorage.getItem('token-edux') 
@@ -65,6 +66,7 @@ const routing = (
       <RotaAluno path='/perfil' component={Perfil} />
       <RotaAluno path='/timeline' component={Timeline} />
       <RotaAluno path='/ranking' component={Ranking} />
+      <RotaAluno path='/objetivos' component={Objetivos} />
       <RotaAluno path='/cursos' component={Cursos} />
 
        <Route component ={NotFound}/>
