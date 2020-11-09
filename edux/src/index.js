@@ -15,9 +15,14 @@ import Ranking from './pages/ranking'
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';
+import CrudObjetivos from './pages/admin/crudObjetivos/';
 import Dicas from './pages/dicas';
 import Timeline from './pages/timeline';
 import Curso from './pages/admin/crudCurso';
+import CrudTurmas from './pages/admin/crudTurmas';
+import Cursos from './pages/cursos';
+import Perfil from './pages/perfil';
+
 
 const token = localStorage.getItem('token-edux') 
 
@@ -53,10 +58,15 @@ const routing = (
       <Route path='/login' component ={Login}/>
       <RotaPrivada path='/admin/dashboard' component={Dashboard} />
       <RotaPrivada path='/admin/crudCursos' component={Curso} />
+      <RotaPrivada path='/admin/crudObjetivos' component={CrudObjetivos} />
       <RotaPrivada path='/admin/crudDicas' component={CrudDicas} />
+      <RotaPrivada path='/admin/crudTurmas' component={CrudTurmas} />
       <RotaAluno path='/dicas' component={Dicas} />
+      <RotaAluno path='/perfil' component={Perfil} />
       <RotaAluno path='/timeline' component={Timeline} />
       <RotaAluno path='/ranking' component={Ranking} />
+      <RotaAluno path='/cursos' component={Cursos} />
+
        <Route component ={NotFound}/>
     </Switch>
   </Router>

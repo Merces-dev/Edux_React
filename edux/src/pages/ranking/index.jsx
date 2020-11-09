@@ -10,9 +10,11 @@ const Ranking = () => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        
         listar();
     }, []);
+
+
+
 
     const listar = () => {
         fetch(url + '/usuario')
@@ -33,27 +35,38 @@ const Ranking = () => {
 
         <Header />
 
-        <Titulo titulo="Ranking" chamada="Veja o ranking de pontuação dos alunos" />
+        <Titulo titulo="Ranking" chamada="Veja o ranking dos alunos" />
         <Container>
 
         <Table striped bordered hover>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Nome</th>
-                    <th>Pontuação</th>
+                    <th>Pontuação total</th>
                 </tr>
             </thead>
             <tbody>
-                {
-                    usuarios.map((item, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{item.nome}</td>
-                                <td>{item.pontuacao}</td>
-                            </tr>
-                        )
-                    })
-                }
+                <tr>
+                    <td>1</td>
+                    <td>Joao Paulo</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Livia Oliveira</td>
+                    <td>73</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Ana Gomes</td>
+                    <td>71</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Lucas Castro</td>
+                    <td>54</td>
+                </tr>
             </tbody>
             </Table>
         </Container>

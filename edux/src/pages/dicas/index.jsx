@@ -1,61 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
-import Titulo from '../../components/titulo';
+import React, { useState,useEffect } from 'react';
+import { Table, Container, Button } from 'react-bootstrap';
+import Header from '../../components/header'
+import Footer from '../../components/footer'
+import Titulo from '../../components/titulo'
 import { url } from '../../utils/constants';
 
 const Dicas = () => {
-    const [dicas, setDicas] = useState([]);
+
+    const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        listarDicas();
-    }, [])
+        listar();
+    }, []);
 
-    const listarDicas = () => {
-        fetch(`${url}/dicas`)
+
+
+
+    const listar = () => {
+        fetch(url + '/usuario')
+
+            
+            
             .then(response => response.json())
-            .then(dados => {
-                setDicas(dados.data);
+            .then(data => {
+                setUsuarios(data)
+
             })
             .catch(err => console.error(err));
-    }
+        
+        }
+    
+    return(
+    <div>
 
-    return (
-        <div>
-            <Header />
+        <Header />
 
-            <Container>
-                <Titulo titulo="Dicas" chamada="Confira todas as dicas!" />
+        <Titulo titulo="Dicas" chamada="Confira suas dicas" />
+        <Container>
 
-
-                <br></br>
-                <Row>
-
-                    {
-                        dicas.map((item, index) => {
-                            return (
-                                <Col xs='4'>
-                                    <Card>
-                                        <Card.Img variant="top" src={item.urlImagem} />
-                                        <Card.Body>
-                                            <Card.Title>{item.titulo}</Card.Title>
-                                            <Card.Text>
-                                                {item.descricao}
-                                            </Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer>
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
-            </Container>
-            <Footer />
-        </div>
+        <Table striped bordered hover>
+            <thead>
+                <tr>
+                    <th>Professor</th>
+                    <th>Dica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <td>Paulo Brandão</td>
+                    <td>Lembre-se do espaço ao escrever o 'Bearer '</td>
+                  
+                   
+                </tr>
+                <tr>
+                    
+                    <td>Fernando Henrique</td>
+                    <td>Cuidado com as sabotagens</td>
+                    <td>
+                  
+                   </td>
+                </tr>
+               
+            </tbody>
+            </Table>
+        </Container>
+        <Footer />
+    </div>
     )
+
 }
 
-export default Dicas
+export default Dicas;

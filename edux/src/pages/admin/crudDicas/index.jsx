@@ -1,40 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Form, Button, Card, Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { Container, Table, Button, Form, Card } from 'react-bootstrap';
+import { url } from '../../../utils/constants'
+import Menu from '../../../components/header'
+import Rodape from '../../../components/footer'
+import Titulo from '../../../components/titulo'
 
-import Header from '../../../components/header';
-import Footer from '../../../components/footer';
-import Titulo from '../../../components/titulo';
-import {url} from '../../../utils/constants';
-
-const CrudDicas = () => {
-    
-    const [ id, setId ] = useState(0);
+const CrudDica = () => {
+    const [idDica, setIdDica] = useState(0);
+    const [idUsuario, setIdUsuario] = useState(0);
     const [titulo, setTitulo] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [ urlImagem, setUrlImagem] = useState('');
+    const [texto, setTexto] = useState('');
     const [dicas, setDicas] = useState([]);
+    const [usuario, setUsuario] = useState([]);
+    const [urlImagem, setUrlImagem] = useState('');
+   
 
     useEffect(() => {
-       listarDicas();
-    },[]);
+        listarDicas()
+        listarUsuario()
+    }, []);
 
-   
-   const listarDicas = () => {
-        fetch(`${url}/Dica`)
-        .then(response => response.json())
-        .then(dados => {
-            setDicas(dados.data);
+    //listando usuario
+    const listarUsuario = () => {
 
-            limparCampos();
-        })
-        .catch(err => console.error(err));
+        fetch(`${url}/usuario`)
+            .then(response => response.json())
+            .then(dados => {
+                setUsuario(dados.data);
+                limparCampos();
+            })
+            .catch(err => console.error(err));
+    }
+
+    //listando dicas
+    const listarDicas = () => {
+
+        fetch(`${url}/dica`)
+            .then(response => response.json())
+            .then(dados => {
+                setDicas(dados.data);
+                limparCampos();
+
+            })
+            .catch(err => console.error(err));
     }
 
     const uploadFile = (event) => {
-        event.preventDefault()
-
-
-        console.log(event);
 
         let formdata = new FormData();
         formdata.append('arquivo', event.target.files[0]);
@@ -46,149 +57,175 @@ const CrudDicas = () => {
         })
         .then(response => response.json())
         .then(data =>{
+            console.log(data)
             setUrlImagem(data.url);
         })
         .catch(err => console.error(err))
     }
 
-    const salvar = ( event) => {
-        event.preventDefault();
-
-        const dica = {
-            titulo : titulo,
-            urlImagem : urlImagem,
-            descricao : descricao
-        }
-
-        let method = (id === 0 ? 'POST' : 'PUT');
-        let urlRequest = (id === 0 ? `${url}/dicas` :  `${url}/dicas/${id}`);
-
-        fetch(urlRequest, {
-            method : method,
-            body : JSON.stringify(dica),
-            headers : {
-                'content-type' : 'application/json',
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
-            }
-        })
-        .then(response => response.json())
-        .then(dados => {
-            alert('Dica salva');
-
-            listarDicas();
-        })
-        .catch(err => console.error(err))
-    }
-
+    //editando 
     const editar = (event) => {
-        event.preventDefault();
+     
 
-        fetch(url + '/Dica/' + event.target.value, {
-            method : 'GET',
-            headers : {
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
-            }
+        fetch(`${url}/dica/${event.target.value}`, {
+            method : 'GET'
         })
         .then(response => response.json())
         .then(dado => {
-            setId(dado.data.id);
-            setTitulo(dado.data.titulo);
-            setUrlImagem(dado.data.urlImagem);
-            setDescricao(dado.data.descricao);
+            setIdDica(dado.IdDica);
+            setTitulo(dado.titulo);
+            setIdUsuario(dado.idUsuario);
+            setUrlImagem(dado.urlImagem);
+            setTexto(dado.texto);
+
         })
     }
 
-    const remover = (event) => {
-        event.preventDefault();
+    //excluindo
+    const excluir = (event) => {
+      
+        console.log(event.target.value)
 
-        fetch(url + '/Dica/' + event.target.value,{
-            method : 'DELETE',
-            headers : {
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+        fetch(url + '/dica/' + event.target.value, {
+            method: 'DELETE',
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => response.json())
-        .then(dados => {
-            alert('Dica removida');
+            .then(response => response.json())
+            .then(data => {
+                alert('Dica removida!')
+                listarDicas()
+            })
+    }
 
-            listarDicas();
+    const dica = {
+        idDica : idDica,
+        titulo: titulo,
+        idUsuario: idUsuario,
+        urlImagem : urlImagem,
+        texto : texto,
+    }
+
+   
+
+    const salvar = (dica) => {
+
+        let method = (idDica === 0 ? 'POST' : 'PUT');
+        let urlRequest = (idDica === 0 ? url + '/dica' : url + '/dica/' + idDica);
+
+
+        fetch(urlRequest, {
+            method: method,
+            body: JSON.stringify({
+                idDica : idDica,
+                titulo: titulo,
+                idUsuario: idUsuario,
+                urlImagem : urlImagem,
+                texto : texto,
+            }),
+            headers: {
+                'content-type': 'application/json',
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log(response.json());
+
+                alert('Dica cadastrada com sucesso!');
+            }
         })
     }
 
     const limparCampos = () => {
-        setId(0);
-            setTitulo('');
-            setUrlImagem('');
-            setDescricao('');
+        setIdDica(0);
+        setTitulo(1);
+        setIdUsuario(0);
+        setUrlImagem('');
+        setTexto('');
     }
 
-
-    
-    
-    return(
-        <div>
-        <Header />
-        <Container>
-        
-        <Titulo  titulo   = "Dicas" chamada="Gerencie suas postagens de dicas" />
-
-        <Card>
-                        <Card.Body>
-                        <Form onSubmit={event => salvar(event)}>
-                            <Form.Group controlId="formNome">
-                                <Form.Label>Titulo</Form.Label>
+    return (
+        <div >
+            <Menu />
+           
+            <Titulo
+                    titulo="Dicas" chamada="Gerencie suas dicas" />
+                    <Container style={{ marginTop: '4em' }}>
+                  
+                <Card >
+                <Card.Body>
+                        <Form onSubmit={event => salvar(dica)}>
+                            <Form.Group controlId="formTitulo">
+                                <Form.Label>Título</Form.Label>
                                 <Form.Control type="text" value={titulo} onChange={event => setTitulo(event.target.value)} />
-                            </Form.Group>    
+                            </Form.Group>
+
+                            <Form.Group controlId="formTexto">
+                                <Form.Label>Texto</Form.Label>
+                                <Form.Control as="textarea"  rows={3} value={texto} onChange={event => setTexto(event.target.value)} />
+                            </Form.Group>
 
                             <Form.Group controlId="formImagem">
-                                <Form.File id="fileEvento" label="Imagem da dica" onChange={event => uploadFile(event)} />
+                                <Form.File id="fileDica" label="Imagem da dica" onChange={event => uploadFile(event)} />
                                 { urlImagem && <img src={urlImagem} style={{ width : '160px'}} />}
                             </Form.Group>
-                            
-                            <Form.Group controlId="formDescricao">
-                                <Form.Label>Descrição</Form.Label>
-                                <Form.Control as="textarea" rows={3} value={descricao} onChange={event => setDescricao(event.target.value)} />
+
+                            <Form.Group controlId="formUsuario">
+                                <Form.Label>Usuário</Form.Label>
+                                <Form.Control as="select" value={idUsuario} onChange={ event => setIdUsuario(event.target.value)}>
+                                    <option value={0}>Selecione</option>
+                                    {
+                                        usuario.map((item, index) => {
+                                            return (
+                                                <option key={index} value={item.idUsuario}>{item.nome}</option>
+                                            )
+                                        })
+                                    }
+                                </Form.Control>
                             </Form.Group>
-                              
-                            <Button type="submit" >Salvar</Button>
+
+                            <Button type="submit" style={{ background: '#00d65f', borderColor: '#00d65f' }}>Salvar</Button>
                         </Form>
-                        </Card.Body>
-                    </Card>
-                    <Card>
-                        <Card.Body>
-                        <Table bordered>
-                            <thead>
-                                <tr>
-                                    <th>Imagem</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    dicas.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td><img src={item.urlImagem} style={{ width : '120px'}} /></td>
-                                            <td>{item.titulo}</td>
-                                            <td>{item.descricao}</td>
-                                            <td>
-                                                <Button type="button" variant="warning" value={item.id} onClick={ event => editar(event)}>Editar</Button>
-                                                <Button type="button" variant="danger" value={item.id} style={{ marginLeft : '30px'}} onClick={ event => remover(event)}>Remover</Button>
-                                            </td>
-                                        </tr>
-                                    )
-                                    })
-                                }
-                            </tbody>
-                        </Table>
-                        </Card.Body>
-                    </Card>
+                        
+                    </Card.Body>
+                </Card>
+                <Table style={{ background: '#FFFFFF', borderRadius: '10px', marginTop: '2em' }} striped hover>
+                    <thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>Titulo</th>
+                            <th>Texto</th>
+                            <th>Usuário</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            dicas.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td><img src={item.urlImagem} style={{ width : '120px'}}/></td>
+                                        <td>{item.titulo}</td>
+                                        <td>{item.texto}</td>
+                                        <td>{item.idUsuario}</td>
+                                        <td>
+                                            <Button type="button" variant="primary" value={item.idDica} onClick={event => editar(event)}>Editar</Button>
+                                            <Button type="button" variant="danger" value={item.idDica}  onClick={event => excluir(event)}>Excluir</Button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+
+
+                </Table>
             </Container>
-        <Footer />
-    </div>  
+            <Rodape />
+        </div>
     )
 }
 
-export default CrudDicas;
+export default CrudDica;

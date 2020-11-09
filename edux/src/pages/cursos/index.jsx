@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Table, Button, Form, Card } from 'react-bootstrap';
-import { url } from '../../../utils/constants'
-import Menu from '../../../components/header'
-import Rodape from '../../../components/footer'
-import Titulo from '../../../components/titulo'
-
+import { url } from '../../utils/constants'
+import Menu from '../../components/header'
+import Rodape from '../../components/footer'
+import Titulo from '../../components/titulo'
 
 const CrudCurso = () => {
     const [idCurso, setIdCurso] = useState(0);
@@ -101,9 +100,7 @@ const CrudCurso = () => {
                 console.log(response.json());
 
                 alert('Curso cadastrado com sucesso!');
-                listarCursos();
             }
-            
         })
     }
 
@@ -118,41 +115,15 @@ const CrudCurso = () => {
             <Menu />
             
                 <Titulo
-                    titulo="Cursos" chamada="Gerencie os cursos" />
+                    titulo="Cursos" chamada="Verifique os cursos" />
                     <Container style={{ marginTop: '4em' }}>
-                <Card >
-                <Card.Body>
-                        <Form onSubmit={event => salvar(curso)}>
-                            <Form.Group controlId="formNome">
-                                <Form.Label>Título</Form.Label>
-                                <Form.Control type="text" value={titulo} onChange={event => setTitulo(event.target.value)} />
-                            </Form.Group>
-
-                            <Form.Group controlId="formInstituicao">
-                                <Form.Label>Instituição</Form.Label>
-                                <Form.Control as="select" value={idInstituicao} onChange={ event => setidInstituicao(event.target.value)}>
-                                    <option value={0}>Selecione</option>
-                                    {
-                                        instituicoes.map((item, index) => {
-                                            return (
-                                                <option key={index} value={item.idInstituicao}>{item.nome}</option>
-                                            )
-                                        })
-                                    }
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Button type="submit" style={{ background: '#00d65f', borderColor: '#00d65f' }}>Salvar</Button>
-                        </Form>
-                        
-                    </Card.Body>
-                </Card>
+                
                 <Table style={{ background: '#FFFFFF', borderRadius: '10px', marginTop: '2em' }} striped hover>
                     <thead>
                         <tr>
                             <th>Titulo</th>
                             <th>Instituição</th>
-                            <th>Ações</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -162,10 +133,7 @@ const CrudCurso = () => {
                                     <tr key={index}>
                                         <td>{item.titulo}</td>
                                         <td>{item.idInstituicao}</td>
-                                        <td>
-                                            <Button type="button" variant="primary" value={item.idCurso} onClick={event => editar(event)}>Editar</Button>
-                                            <Button type="button" variant="danger" value={item.idCurso}  onClick={event => excluir(event)}>Excluir</Button>
-                                        </td>
+                                       
                                     </tr>
                                 )
                             })

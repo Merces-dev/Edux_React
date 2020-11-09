@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-import LogoColorida from '../../assets/img/logo_colorida.png'
-import jwt_decode from 'jwt-decode'
+import LogoColorida from '../../assets/img/logo_colorida.png';
+import jwt_decode from 'jwt-decode';
 
 import './index.css'
 import { useHistory } from 'react-router-dom';
