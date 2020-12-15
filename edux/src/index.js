@@ -12,7 +12,6 @@ import Home from './pages/home';
 import CadastrarAluno from './pages/cadastroaluno';
 import Login from './pages/login';
 import Ranking from './pages/ranking'
-import Perfil from './pages/perfil'
 import NotFound from './pages/notfound';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import CrudDicas from './pages/admin/crudDicas/';

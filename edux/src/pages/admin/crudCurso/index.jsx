@@ -44,16 +44,22 @@ const CrudCurso = () => {
     const editar = (event) => {
         event.preventDefault();
 
-        fetch(`${url}/curso/${event.target.value}`, {
-            method : 'GET'
+        fetch(url + '/curso/' + event.target.value, {
+            method : 'GET',
+            headers : {
+                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            }
         })
         .then(response => response.json())
         .then(dado => {
-            setIdCurso(dado.idCurso);
-            setTitulo(dado.titulo);
-            setidInstituicao(dado.idInstituicao);
+            setIdCurso(dado.data.idCurso);
+            setTitulo(dado.data.Titulo);
+            setidInstituicao(dado.data.idInstituicao);
+            
         })
+        .catch(err => console.error(err));
     }
+
 
     const excluir = (event) => {
         event.preventDefault();
@@ -78,7 +84,7 @@ const CrudCurso = () => {
         idInstituicao: idInstituicao
     }
 
-    const salvar = (curso) => {
+    const salvar = (event) => {
 
         let method = (idCurso === 0 ? 'POST' : 'PUT');
         let urlRequest = (idCurso === 0 ? url + '/curso' : url + '/curso/' + idCurso);
@@ -86,25 +92,19 @@ const CrudCurso = () => {
 
         fetch(urlRequest, {
             method: method,
-            body: JSON.stringify({
-                idCurso : idCurso,
-                titulo: titulo,
-                idInstituicao: idInstituicao
-            }),
+            body: JSON.stringify(curso),
             headers: {
                 'content-type': 'application/json',
                 'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => {
-            if (response.ok) {
-                console.log(response.json());
+        .then(response => response.json())
+        .then(dados => {
+            alert('Curso salvo');
 
-                alert('Curso cadastrado com sucesso!');
-                listarCursos();
-            }
-            
+            listarCursos();
         })
+        .catch(err => console.error(err))
     }
 
     const limparCampos = () => {
