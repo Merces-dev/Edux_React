@@ -4,6 +4,8 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import LogoColorida from '../../assets/img/logo_colorida.png';
 import jwt_decode from 'jwt-decode';
+import { url } from '../../utils/constants';
+
 
 import './index.css'
 import { useHistory } from 'react-router-dom';
@@ -18,7 +20,7 @@ const Login = () => {
     const [senha, setSenha] = useState('');
     const logar = (event) => {
         event.preventDefault();
-        fetch('http://localhost:5000/api/login', {
+        fetch(url + '/login', {
             method: 'POST',
             body: JSON.stringify({
                 email: email,
