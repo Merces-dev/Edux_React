@@ -27,43 +27,43 @@ import Objetivos from './pages/objetivos';
 
 const token = localStorage.getItem('token-edux') 
 
-// // Somente para quem nao tem cadastro
-// const RotaNaoCadastrado= ({component : Component, ...rest}) => (
-//   <Route
-//     {...rest}
-//     render = {
-//       props => 
-//       token !== null ?
-//       <Redirect to={{pathname:'/', state:{from : props.location}}}/>:
-//     <Component {...props}/>
-//     }
-//   />
-// );
-// // Somente para alunos
+// Somente para quem nao tem cadastro
+const RotaNaoCadastrado= ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = {
+      props => 
+      token !== null ?
+      <Redirect to={{pathname:'/', state:{from : props.location}}}/>:
+    <Component {...props}/>
+    }
+  />
+);
+//Somente para alunos
 
-// const RotaAluno = ({component : Component, ...rest}) => (
-//   <Route
-//     {...rest}
-//     render = {
-//       props => 
-//       token === null ?
-//       <Redirect to={{pathname:'/login', state:{from : props.location}}}/>:
-//     <Component {...props}/>
-//     }
-//   />
-// );
-// // Somente para professores
+const RotaAluno = ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = {
+      props => 
+      token === null ?
+      <Redirect to={{pathname:'/login', state:{from : props.location}}}/>:
+    <Component {...props}/>
+    }
+  />
+);
+// Somente para professores
 
-// const RotaPrivada = ({component : Component, ...rest}) => (
-//   <Route
-//     {...rest}
-//     render = { props => 
-//       token !== null && jwt_decode(token).role === 'Admin' ?
-//         <Component {...props} /> :
-//         <Redirect to={{pathname : '/login', state :{from : props.location}}} /> 
-//     }
-//   />
-// );
+const RotaPrivada = ({component : Component, ...rest}) => (
+  <Route
+    {...rest}
+    render = { props => 
+      token !== null && jwt_decode(token).role === 'Admin' ?
+        <Component {...props} /> :
+        <Redirect to={{pathname : '/login', state :{from : props.location}}} /> 
+    }
+  />
+);
 
 
 
@@ -71,19 +71,19 @@ const routing = (
   <Router>
     <Switch>
       <Route exact path='/' component={Home} />
-      {/* <RotaNaoCadastrado path='/cadastrar' component={CadastrarAluno} />
+      <RotaNaoCadastrado path='/cadastrar' component={CadastrarAluno} />
       <RotaNaoCadastrado path='/login' component ={Login}/>
-      <RotaPrivada path='/admin/dashboard' component={Dashboard} /> */}
-      <Router path='/admin/crudCursos' component={Curso} />
-      {/* <RotaPrivada path='/admin/crudObjetivos' component={CrudObjetivos} />
-      <RotaPrivada path='/admin/crudDicas' component={CrudDicas} /> */}
-      <Route path='/admin/crudTurmas' component={CrudTurmas} />
-      {/* <RotaAluno path='/dicas' component={Dicas} />
+      <RotaPrivada path='/admin/dashboard' component={Dashboard} />
+      <RotaPrivada path='/admin/crudCursos' component={Curso} />
+      <RotaPrivada path='/admin/crudObjetivos' component={CrudObjetivos} />
+      <RotaPrivada path='/admin/crudDicas' component={CrudDicas} />
+      <RotaPrivada path='/admin/crudTurmas' component={CrudTurmas} />
+      <RotaAluno path='/dicas' component={Dicas} />
       <RotaAluno path='/perfil' component={Perfil} />
       <RotaAluno path='/timeline' component={Timeline} />
       <RotaAluno path='/ranking' component={Ranking} />
       <RotaAluno path='/objetivos' component={Objetivos} />
-      <RotaAluno path='/cursos' component={Cursos} /> */}
+      <RotaAluno path='/cursos' component={Cursos} />
 
        <Route component ={NotFound}/>
     </Switch>
