@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Container, Table, Button, Form, Card } from 'react-bootstrap';
 import { url } from '../../../utils/constants'
@@ -7,8 +8,8 @@ import Titulo from '../../../components/titulo'
 
 
 const CrudCurso = () => {
-    const [idCurso, setIdCurso] = useState(0);
-    const [idInstituicao, setidInstituicao] = useState(0);
+    const [idCurso, setIdCurso] = useState('');
+    const [idInstituicao, setidInstituicao] = useState('');
     const [titulo, setTitulo] = useState('');
     const [cursos, setCursos] = useState([]);
     const [instituicoes, setInstituicoes] = useState([]);
@@ -45,19 +46,19 @@ const CrudCurso = () => {
         event.preventDefault();
 
         fetch(url + '/curso/' + event.target.value, {
-            method : 'GET',
-            headers : {
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => response.json())
-        .then(dado => {
-            setIdCurso(dado.data.idCurso);
-            setTitulo(dado.data.Titulo);
-            setidInstituicao(dado.data.idInstituicao);
-            
-        })
-        .catch(err => console.error(err));
+            .then(response => response.json())
+            .then(dado => {
+                setIdCurso(dado.idCurso);
+                setTitulo(dado.titulo);
+                setidInstituicao(dado.idInstituicao);
+
+            })
+            .catch(err => console.error(err));
     }
 
 
@@ -77,17 +78,23 @@ const CrudCurso = () => {
                 alert('Curso removido!')
                 listarCursos()
             })
+            .catch(err => console.error(err));
     }
 
-    const curso = {
-        titulo: titulo,
-        idInstituicao: idInstituicao
-    }
 
     const salvar = (event) => {
+        event.preventDefault();
 
-        let method = (idCurso === 0 ? 'POST' : 'PUT');
-        let urlRequest = (idCurso === 0 ? url + '/curso' : url + '/curso/' + idCurso);
+        let curso = {
+            //idCurso: idCurso,
+            titulo: titulo,
+            idInstituicao: idInstituicao
+
+        }
+
+
+        let method = (idCurso === '' ? 'POST' : 'PUT');
+        let urlRequest = (idCurso === '' ? url + '/curso' : url + '/curso/' + idCurso);
 
 
         fetch(urlRequest, {
@@ -98,31 +105,31 @@ const CrudCurso = () => {
                 'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => response.json())
-        .then(dados => {
-            alert('Curso salvo');
-
-            listarCursos();
-        })
-        .catch(err => console.error(err))
+            .then(response => response.json())
+            .then(response => {
+                alert('Curso salvo');
+                limparCampos();
+                listarCursos();
+            })
+            .catch(err => console.error(err))
     }
 
     const limparCampos = () => {
-        setIdCurso(0);
-        setidInstituicao(0);
+        setIdCurso('');
+        setidInstituicao('');
         setTitulo('');
     }
 
     return (
         <div >
             <Menu />
-            
-                <Titulo
-                    titulo="Cursos" chamada="Gerencie os cursos" />
-                    <Container style={{ marginTop: '4em' }}>
+
+            <Titulo
+                titulo="Cursos" chamada="Gerencie seus cursos" />
+            <Container style={{ marginTop: '4em' }}>
                 <Card >
-                <Card.Body>
-                        <Form onSubmit={event => salvar(curso)}>
+                    <Card.Body>
+                        <Form onSubmit={event => salvar(event)}>
                             <Form.Group controlId="formNome">
                                 <Form.Label>Título</Form.Label>
                                 <Form.Control type="text" value={titulo} onChange={event => setTitulo(event.target.value)} />
@@ -130,7 +137,7 @@ const CrudCurso = () => {
 
                             <Form.Group controlId="formInstituicao">
                                 <Form.Label>Instituição</Form.Label>
-                                <Form.Control as="select" value={idInstituicao} onChange={ event => setidInstituicao(event.target.value)}>
+                                <Form.Control as="select" value={idInstituicao} onChange={event => setidInstituicao(event.target.value)}>
                                     <option value={0}>Selecione</option>
                                     {
                                         instituicoes.map((item, index) => {
@@ -144,7 +151,7 @@ const CrudCurso = () => {
 
                             <Button type="submit" style={{ background: '#00d65f', borderColor: '#00d65f' }}>Salvar</Button>
                         </Form>
-                        
+
                     </Card.Body>
                 </Card>
                 <Table style={{ background: '#FFFFFF', borderRadius: '10px', marginTop: '2em' }} striped hover>
@@ -161,10 +168,10 @@ const CrudCurso = () => {
                                 return (
                                     <tr key={index}>
                                         <td>{item.titulo}</td>
-                                        <td>{item.idInstituicao}</td>
+                                        <td>{item.idInstituicaoNavigation.nome}</td>
                                         <td>
                                             <Button type="button" variant="primary" value={item.idCurso} onClick={event => editar(event)}>Editar</Button>
-                                            <Button type="button" variant="danger" value={item.idCurso}  onClick={event => excluir(event)}>Excluir</Button>
+                                            <Button type="button" variant="danger" value={item.idCurso} onClick={event => excluir(event)}>Excluir</Button>
                                         </td>
                                     </tr>
                                 )

@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
 
+
 //Páginas
 import Home from './pages/home';
 import CadastrarAluno from './pages/cadastroaluno';
@@ -84,8 +85,7 @@ const routing = (
       <RotaAluno path='/ranking' component={Ranking} />
       <RotaAluno path='/objetivos' component={Objetivos} />
       <RotaAluno path='/cursos' component={Cursos} />
-
-       <Route component ={NotFound}/>
+      <Route component ={NotFound}/>
     </Switch>
   </Router>
 )

@@ -25,9 +25,9 @@ const Footer = () => {
             })
     };
     return (
-        <div className=' footer '>
+        <div className=' footer ' >
             <br />
-            <Navbar bg='success' variant='dark' className='justify-content-around text-white py-3 column align' >
+            <Navbar style={{backgroundColor: '#9100D6'}} variant='dark' className='justify-content-around text-white py-3 column align' >
                 <Nav className='d-flex flex-column navTxtImg mt-30'>
                     <Navbar.Brand href="#home"><img src={logo} className="imgfooter " alt="Edux" /></Navbar.Brand>
                     <Nav.Item > Sua plataforma de estudos online</Nav.Item>

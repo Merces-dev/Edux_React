@@ -33,7 +33,7 @@ const Header = () => {
           <Nav.Link className='hover' href="/admin/crudcursos">Crud Cursos</Nav.Link>
           <Nav.Link className='hover' href="/admin/crudobjetivos">Crud Objetivos</Nav.Link>
           <Nav.Link className='hover' href="/admin/crudTurmas">Crud Turmas</Nav.Link>
-          <NavDropdown className='hover' title={jwt_decode(token).nameid}>
+          <NavDropdown className='hover' title={jwt_decode(token).family_name}>
             <NavDropdown.Item onClick={event => sair(event)}>Sair da conta</NavDropdown.Item >
           </NavDropdown>
         </Nav>
@@ -49,7 +49,7 @@ const Header = () => {
           <Nav.Link className='hover' href="/objetivos">Objetivos</Nav.Link>
           <Nav.Link className='hover' href="/turmas">Turmas</Nav.Link>
 
-          <NavDropdown className='hover' title={jwt_decode(token).nameid}>
+          <NavDropdown className='hover' title={jwt_decode(token).family_name}>
             <NavDropdown.Item href="/perfil">Perfil do Aluno </NavDropdown.Item >
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={event => sair(event)}>Sair da conta</NavDropdown.Item >
@@ -63,7 +63,7 @@ const Header = () => {
   }
   return (
     <div>
-      <Navbar collapseOnSelect  className="d-flex justify-content-around"  expand="lg" bg="success" variant="dark">
+      <Navbar collapseOnSelect  className="d-flex justify-content-around"  expand="lg" style={{backgroundColor: '#9100D6'}} variant="dark">
         <Navbar.Brand  style={{marginLeft: '80px'}}href="/"><img src={logo} className="nav-logo" alt="Edux" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
