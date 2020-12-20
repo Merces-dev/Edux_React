@@ -40,7 +40,7 @@ const RotaNaoCadastrado= ({component : Component, ...rest}) => (
     }
   />
 );
-// Somente para alunos
+//Somente para alunos
 
 const RotaAluno = ({component : Component, ...rest}) => (
   <Route
