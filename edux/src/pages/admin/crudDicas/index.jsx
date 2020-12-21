@@ -6,8 +6,8 @@ import Rodape from '../../../components/footer'
 import Titulo from '../../../components/titulo'
 
 const CrudDica = () => {
-    const [idDica, setIdDica] = useState(0);
-    const [idUsuario, setIdUsuario] = useState(0);
+    const [idDica, setIdDica] = useState('');
+    const [idUsuario, setIdUsuario] = useState('');
     const [titulo, setTitulo] = useState('');
     const [texto, setTexto] = useState('');
     const [dicas, setDicas] = useState([]);
@@ -46,7 +46,10 @@ const CrudDica = () => {
     }
 
     const uploadFile = (event) => {
+        event.preventDefault()
 
+        debugger;
+        console.log(event);
         let formdata = new FormData();
         formdata.append('arquivo', event.target.files[0]);
         
@@ -57,7 +60,6 @@ const CrudDica = () => {
         })
         .then(response => response.json())
         .then(data =>{
-            console.log(data)
             setUrlImagem(data.url);
         })
         .catch(err => console.error(err))
@@ -65,25 +67,30 @@ const CrudDica = () => {
 
     //editando 
     const editar = (event) => {
-     
+        event.preventDefault();
 
-        fetch(`${url}/dica/${event.target.value}`, {
-            method : 'GET'
+        fetch(url + '/dica/' + event.target.value, {
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
+            }
         })
-        .then(response => response.json())
-        .then(dado => {
-            setIdDica(dado.IdDica);
-            setTitulo(dado.titulo);
-            setIdUsuario(dado.idUsuario);
-            setUrlImagem(dado.urlImagem);
-            setTexto(dado.texto);
+            .then(response => response.json())
+            .then(dado => {
+                setIdDica(dado.idDica);
+                setTitulo(dado.titulo);
+                setIdUsuario(dado.idUsuario);
+                setUrlImagem(dado.urlImagem);
+                setTexto(dado.texto);
 
-        })
+            })
+            .catch(err => console.error(err));
     }
 
     //excluindo
     const excluir = (event) => {
-      
+        event.preventDefault();
+
         console.log(event.target.value)
 
         fetch(url + '/dica/' + event.target.value, {
@@ -97,51 +104,50 @@ const CrudDica = () => {
                 alert('Dica removida!')
                 listarDicas()
             })
+            .catch(err => console.error(err));
     }
 
-    const dica = {
-        idDica : idDica,
-        titulo: titulo,
-        idUsuario: idUsuario,
-        urlImagem : urlImagem,
-        texto : texto,
-    }
+    
 
    
 
-    const salvar = (dica) => {
+    const salvar = (event) => {
+        event.preventDefault();
 
-        let method = (idDica === 0 ? 'POST' : 'PUT');
-        let urlRequest = (idDica === 0 ? url + '/dica' : url + '/dica/' + idDica);
+        let dica = {
+            titulo: titulo,
+            idUsuario: idUsuario,
+            urlImagem: urlImagem,
+            texto: texto,
+
+        }
+
+
+        let method = (idDica === '' ? 'POST' : 'PUT');
+        let urlRequest = (idDica === '' ? url + '/dica' : url + '/dica/' + idDica);
 
 
         fetch(urlRequest, {
             method: method,
-            body: JSON.stringify({
-                idDica : idDica,
-                titulo: titulo,
-                idUsuario: idUsuario,
-                urlImagem : urlImagem,
-                texto : texto,
-            }),
+            body: JSON.stringify(dica),
             headers: {
                 'content-type': 'application/json',
                 'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => {
-            if (response.ok) {
-                console.log(response.json());
-
-                alert('Dica cadastrada com sucesso!');
-            }
-        })
+            .then(response => response.json())
+            .then(response => {
+                alert('Dica salva');
+                limparCampos();
+                listarDicas();
+            })
+            .catch(err => console.error(err))
     }
 
     const limparCampos = () => {
-        setIdDica(0);
-        setTitulo(1);
-        setIdUsuario(0);
+        setIdDica('');
+        setTitulo('');
+        setIdUsuario('');
         setUrlImagem('');
         setTexto('');
     }
@@ -156,7 +162,7 @@ const CrudDica = () => {
                   
                 <Card >
                 <Card.Body>
-                        <Form onSubmit={event => salvar(dica)}>
+                        <Form onSubmit={event => salvar(event)}>
                             <Form.Group controlId="formTitulo">
                                 <Form.Label>Título</Form.Label>
                                 <Form.Control type="text" value={titulo} onChange={event => setTitulo(event.target.value)} />
@@ -209,7 +215,7 @@ const CrudDica = () => {
                                         <td><img src={item.urlImagem} style={{ width : '120px'}}/></td>
                                         <td>{item.titulo}</td>
                                         <td>{item.texto}</td>
-                                        <td>{item.idUsuario}</td>
+                                        <td>{item.idUsuarioNavigation.nome}</td>
                                         <td>
                                             <Button type="button" variant="primary" value={item.idDica} onClick={event => editar(event)}>Editar</Button>
                                             <Button type="button" variant="danger" value={item.idDica}  onClick={event => excluir(event)}>Excluir</Button>

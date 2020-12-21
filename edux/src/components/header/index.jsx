@@ -63,7 +63,7 @@ const Header = () => {
   }
   return (
     <div>
-      <Navbar collapseOnSelect  className="d-flex justify-content-around"  expand="lg" bg="success" variant="dark">
+      <Navbar collapseOnSelect  className="d-flex justify-content-around"  expand="lg" style={{backgroundColor: '#9100D6'}} variant="dark">
         <Navbar.Brand  style={{marginLeft: '80px'}}href="/"><img src={logo} className="nav-logo" alt="Edux" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
