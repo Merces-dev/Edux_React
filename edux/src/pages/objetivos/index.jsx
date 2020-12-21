@@ -7,23 +7,41 @@ import { url } from '../../utils/constants';
 
 const Objetivos = () => {
 
-    const [usuarios, setUsuarios] = useState([]);
+    const [categorias, setCategorias] = useState([]);
+    const [objetivos, setObjetivos] = useState([]);
+
 
     useEffect(() => {
-        listar();
+        listarCategorias();
+        listarObjetivos();
     }, []);
 
 
 
 
-    const listar = () => {
-        fetch(url + '/usuario')
+    const listarCategorias = () => {
+        fetch(url + '/categoria')
 
             
             
             .then(response => response.json())
             .then(data => {
-                setUsuarios(data)
+                setCategorias(data)
+
+            })
+            .catch(err => console.error(err));
+        
+        }
+        
+    const listarObjetivos = () => {
+        fetch(url + '/objetivo')
+
+            
+            
+            .then(response => response.json())
+            .then(data => {
+                setObjetivos(data)
+                console.log(objetivos)
 
             })
             .catch(err => console.error(err));
@@ -41,27 +59,44 @@ const Objetivos = () => {
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th>Objetivo</th>
-                    <th>Texto</th>
+                    <th>Tipos</th>
+                    <th>Descrição</th>
                 </tr>
             </thead>
             <tbody>
+                {
+                categorias.map((item, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{item.tipo}</td>
+                            <td>Esse é um tipo {item.tipo}</td>
+
+                            </tr>
+                        )
+                    })
+
+                }
+            </tbody>
+            </Table>
+
+            <Table striped bordered hover>
+            <thead>
                 <tr>
-                    
-                    <td>Crítico</td>
-                    <td>Isso é um objetivo crítico</td>
-                  
-                   
+                    <th>Objetivos</th>
                 </tr>
-                <tr>
-                    
-                    <td>Oculto</td>
-                    <td>Isso é um objetivo oculto</td>
-                    <td>
-                  
-                   </td>
-                </tr>
-               
+            </thead>
+            <tbody>
+                {
+                objetivos.map((item, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{item.descricao}</td>
+
+                        </tr>
+                        )
+                    })
+
+                }
             </tbody>
             </Table>
         </Container>

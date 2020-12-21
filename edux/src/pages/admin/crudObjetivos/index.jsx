@@ -146,7 +146,7 @@ const CrudObjetivos = () => {
                                     {
                                         categorias.map((item, index) => {
                                             return (
-                                                <option key={index} value={item.idCategoria}>{item.tipo}</option>
+                                                <option key={index} value={item.idCategoria}>{item.idCategoria}</option>
                                             )
                                         })
                                         
@@ -172,7 +172,6 @@ const CrudObjetivos = () => {
                         return (
                             <tr key={index}>
                                 <td>{item.descricao}</td>
-                                <td>{item.idCategoriaNavigation.tipo}</td>
                                 <td>
                                             <Button type="button" variant="primary" value={item.idObjetivo} onClick={event => editar(event)}>Editar</Button>
                                             <Button type="button" variant="danger"  value={item.idObjetivo} onClick={event => remover(event)}>Excluir</Button>
@@ -183,6 +182,7 @@ const CrudObjetivos = () => {
                 }
             </tbody>
             </Table>
+            
             </Container>
 
         <Footer />

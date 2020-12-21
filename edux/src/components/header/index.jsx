@@ -47,7 +47,6 @@ const Header = () => {
           <Nav.Link className='hover' href="/cursos">Cursos</Nav.Link>
           <Nav.Link className='hover' href="/ranking">Ranking</Nav.Link>
           <Nav.Link className='hover' href="/objetivos">Objetivos</Nav.Link>
-          <Nav.Link className='hover' href="/turmas">Turmas</Nav.Link>
 
           <NavDropdown className='hover' title={jwt_decode(token).family_name}>
             <NavDropdown.Item href="/perfil">Perfil do Aluno </NavDropdown.Item >

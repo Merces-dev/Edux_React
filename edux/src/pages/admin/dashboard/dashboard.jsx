@@ -66,7 +66,7 @@ const Dashboard = () => {
                      </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Button href="/admin/crudobjetivos">Vamos</Button>
+                        <Button href="/admin/crudturmas">Vamos</Button>
                     </Card.Footer>
                 </Card>
 
