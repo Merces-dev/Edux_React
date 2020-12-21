@@ -1,77 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import { url } from '../../../utils/constants';
-import Menu from '../../../components/header';
-import Rodape from '../../../components/footer';
+import React, { useEffect, useState } from 'react'
+import { Container, Table, Button, Form, Card } from 'react-bootstrap';
+import { url } from '../../../utils/constants'
+import Menu from '../../../components/header'
+import Rodape from '../../../components/footer'
 import Titulo from '../../../components/titulo'
 
-import {Form, Button, Table, Card, Container} from 'react-bootstrap';
 
 const CrudTurmas = () => {
-    const [idTurmas, setIdTurmas]   = useState(0);
-    const [nomeAluno,setNomeAluno]  = useState('');
-    const [descricao, setDescricao] = useState(''); 
-
-    const [turmas, setTurmas]       = useState([]);
-
-  
-    //Adiconar um aluno na turma.............................................................................
-
-
-
-    
-
-
+    const [idCurso, setIdCurso] = useState('');
+    const [idTurma, setIdTurma] = useState ('');
+    const [turma, setTurma] = useState([]);
+    const [descricao, setDescricao] = useState ('')
 
 
     useEffect(() => {
-        listarAlunos();
-    }, [])
+        listarTurmas()
+    }, []);
 
-    //Listando os alunos na Turmas.....................................................................
-    const listarAlunos = () => {
-        fetch(`${url}/api/Turma`)
-        .then(response => response.json())
-        .then(dados => {
-            setTurmas(dados.data);
 
-        })
-        .catch(err => console.error(err));
+    const listarTurmas = () => {
+
+        fetch(`${url}/turma`)
+            .then(response => response.json())
+            .then(dados => {
+                setTurma(dados.data);
+                limparCampos();
+
+            })
+            .catch(err => console.error(err));
     }
 
-    //salvando um aluno novo na turma.....................................................................
-    const salvar = (event) => {
+    const editar = (event) => {
+        event.preventDefault();
 
-        let method = (idTurmas === 0 ? 'POST' : 'PUT');
-        let urlRequest = (idTurmas === 0 ? url + '/api/Turma' : url + '/turma/' + idTurmas);
-
-
-        fetch(urlRequest, {
-            method: method,
-            body: JSON.stringify(turmas),
+        fetch(url + '/turma/' + event.target.value, {
+            method: 'GET',
             headers: {
-                'content-type': 'application/json',
                 'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => response.json())
-        .then(dados => {
-            alert('Aluno salvo');
+            .then(response => response.json())
+            .then(dado => {
+                setIdTurma(dado.idTurma);
+                setDescricao(dado.descricao);
+                setIdCurso(dado.idCurso);
 
-            listarAlunos();
-        })
-        .catch(err => console.error(err))
-    }
-    // Limpar campos..................................................................................
-    const limparCampos = () => {
-        setIdTurmas(0);
-        setNomeAluno('');
-        setDescricao('');
+            })
+            .catch(err => console.error(err));
     }
 
 
-    // Remover um aluno da Turma.....................................................................
-    const  remover = (event) => {
+    const excluir = (event) => {
         event.preventDefault();
+
+        console.log(event.target.value)
 
         fetch(url + '/turma/' + event.target.value, {
             method: 'DELETE',
@@ -81,103 +63,115 @@ const CrudTurmas = () => {
         })
             .then(response => response.json())
             .then(data => {
-                alert('Aluno removido')
-                listarAlunos()
+                alert('Turma removida!')
+                listarTurmas()
             })
+            .catch(err => console.error(err));
     }
 
-    //Editando um aluno da turma.....................................................................
-    const editar = (event) => {
+
+    const salvar = (event) => {
         event.preventDefault();
 
-        fetch(url + 'turma' + event.target.value, {
-            method : 'GET',
-            headers : {
-                'authorization' : 'Bearer ' + localStorage.getItem('token-edux')
+        let turma = {
+            descricao : descricao,
+            idCurso : idCurso,
+        }
+        
+
+
+        let method = (idTurma === '' ? 'POST' : 'PUT');
+        let urlRequest = (idTurma === '' ? url + '/turma' : url + '/turma/' + idTurma);
+
+
+        fetch(urlRequest, {
+            method: method,
+            body: JSON.stringify(turma),
+            headers: {
+                'content-type': 'application/json',
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => response.json())
-        .then(dado => {
-            setIdTurmas(dado.data.id);
-            setNomeAluno(dado.data.nomeAluno);
-            setDescricao(dado.data.descricao);
-            
-        })
-        .catch(err => console.error(err));
+            .then(response => response.json())
+            .then(response => {
+                alert('Aluno salvo');
+                limparCampos();
+                listarTurmas();
+            })
+            .catch(err => console.error(err))
     }
-    //Html da Pagina WeB.................................................................................
 
-    return(
-        <div>
+    const limparCampos = () => {
+        setIdTurma('');
+        setDescricao('');
+        setIdCurso('');
+    }
 
+    return (
+        <div >
             <Menu />
 
-            
             <Titulo
-                    titulo="Turmas" chamada="Gerencie os seus Alunos" />
-
-            <Container>
-            <Card>
-
-                
+                titulo="Turmas" chamada="Gerencie suas Turmas" />
+            <Container style={{ marginTop: '4em' }}>
+                <Card >
                     <Card.Body>
-
                     <Form onSubmit={event => salvar(event)}>
 
-                        <Form.Group controlId="formBasicNome">
-                                <Form.Label>Nome</Form.Label>
-                                <Form.Control type="text" value={nomeAluno} onChange={event => setNomeAluno(event.target.value)} placeholder="Nome do Aluno"></Form.Control>
-                            </Form.Group>
-                            
-                            <Form.Group controlId="formBasicUrl">
-                                <Form.Label>Descrição</Form.Label>
-                                <Form.Control as="textarea" rows={3} value={descricao} onChange={event => setDescricao(event.target.value)}/>
-                            </Form.Group>
-                            
-                            <Button type="submit" style={{ background: '#00d65f', borderColor: '#00d65f' }}>Salvar</Button>
+                    <Form.Group controlId="formNome">
+                        <Form.Label>Nome</Form.Label>
+                        <Form.Control type="text" value={turma} onChange={event => setTurma(event.target.value)} placeholder="Nome do Aluno"></Form.Control>
+                    </Form.Group>
 
-                        </Form>
+                    <Form.Group controlId="formDescricao">
+                        <Form.Label>Descrição</Form.Label>
+                        <Form.Control as="textarea" rows={1} value={descricao} onChange={event => setDescricao(event.target.value)}/>
+                    </Form.Group>
+
+                    <Button type="submit" style={{ background: '#00d65f', borderColor: '#00d65f' }}>Salvar</Button>
+
+                    </Form>
 
                     </Card.Body>
-            </Card>
-
-            <Table striped bordered hover>
+                </Card>
+                <Table style={{ background: '#FFFFFF', borderRadius: '10px', marginTop: '2em' }} striped hover>
+                    
                     <thead>
                         <tr>
-                            <th>Nome Aluno</th>
+                            <th>Nome</th>
                             <th>Descrição</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     
                     <tbody>
-
-                    {
-                            turmas.map((item, index) => {
+                        {
+                            turma.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{item.nome}</td>
                                         <td>{item.descricao}</td>
+                                        <td>{item.IdCursoNavigation.titulo}</td>
                                         <td>
-                                            <Button variant="warning" value={item.id} onClick={event => editar(event)} >Editar</Button>
-                                            <Button variant="danger" value={item.id} onClick={event => remover(event)} style={{ marginLeft : '40px'}}>Remover</Button>
+                                            <Button type="button" variant="primary" value={item.idTurma} onClick={event => editar(event)}>Editar</Button>
+                                            <Button type="button" variant="danger" value={item.idTurma} onClick={event => excluir(event)}>Excluir</Button>
                                         </td>
+
+
                                     </tr>
                                 )
                             })
                         }
                     </tbody>
 
-                    
+
                 </Table>
-            
-            </Container> 
+
+            </Container>
 
             <Rodape />
-
+            
         </div>
     )
-
-
 }
+
 export default CrudTurmas;
