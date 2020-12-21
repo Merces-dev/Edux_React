@@ -22,8 +22,8 @@ const CrudTurmas = () => {
 
         fetch(`${url}/turma`)
             .then(response => response.json())
-            .then(dados => {
-                setTurma(dados.data);
+            .then(data => {
+                setTurma(data);
                 limparCampos();
 
             })
@@ -94,7 +94,7 @@ const CrudTurmas = () => {
         })
             .then(response => response.json())
             .then(response => {
-                alert('Aluno salvo');
+                alert('Turma salva');
                 limparCampos();
                 listarTurmas();
             })
@@ -118,10 +118,7 @@ const CrudTurmas = () => {
                     <Card.Body>
                     <Form onSubmit={event => salvar(event)}>
 
-                    <Form.Group controlId="formNome">
-                        <Form.Label>Nome</Form.Label>
-                        <Form.Control type="text" value={turma} onChange={event => setTurma(event.target.value)} placeholder="Nome do Aluno"></Form.Control>
-                    </Form.Group>
+                   
 
                     <Form.Group controlId="formDescricao">
                         <Form.Label>Descrição</Form.Label>
@@ -138,8 +135,8 @@ const CrudTurmas = () => {
                     
                     <thead>
                         <tr>
-                            <th>Nome</th>
                             <th>Descrição</th>
+                          
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -150,7 +147,7 @@ const CrudTurmas = () => {
                                 return (
                                     <tr key={index}>
                                         <td>{item.descricao}</td>
-                                        <td>{item.IdCursoNavigation.titulo}</td>
+                                        
                                         <td>
                                             <Button type="button" variant="primary" value={item.idTurma} onClick={event => editar(event)}>Editar</Button>
                                             <Button type="button" variant="danger" value={item.idTurma} onClick={event => excluir(event)}>Excluir</Button>
