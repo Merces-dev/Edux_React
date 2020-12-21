@@ -132,7 +132,7 @@ const CrudCurso = () => {
                                 return (
                                     <tr key={index}>
                                         <td>{item.titulo}</td>
-                                        <td>{item.idInstituicao}</td>
+                                        <td>{item.idInstituicaoNavigation.nome}</td>
                                        
                                     </tr>
                                 )

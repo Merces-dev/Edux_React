@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
+import { url } from '../../utils/constants';
 import jwt_decode from 'jwt-decode'
 import './index.css'
 
@@ -9,7 +10,7 @@ const Perfil = () => {
     const token = localStorage.getItem('token-edux');
     const [datas, setDatas] = useState([]);
 
-    fetch('http://localhost:5000/api/usuario/' + jwt_decode(token).family_name)
+    fetch( url + '/usuario/' + jwt_decode(token).family_name)
         .then(response => {
             return response.json();
         })

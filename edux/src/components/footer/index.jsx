@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import logo from '../../assets/img/logo-branco.png';
+import { url } from '../../../src/utils/constants';
+
 import '../footer/index.css';
 
 const Footer = () => {
     const [email, setEmail] = useState('');
     const cadNewsletter = (event) => {
         event.preventDefault();
-        fetch('http://localhost:5000/api/newsletter', {
+        fetch(url + '/newsletter', {
             method: 'POST',
             body: JSON.stringify({
                 email: email

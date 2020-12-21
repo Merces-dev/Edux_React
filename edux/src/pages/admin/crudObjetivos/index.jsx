@@ -7,23 +7,37 @@ import { url } from '../../../utils/constants';
 
 
 const CrudObjetivos = () => {
-    const [id, setId] = useState(0);
-    const [nome, setNome] = useState('');
-    const [pontuacao, setPontuacao] = useState('');
-    const [usuario, setUsuario] = useState([]);
+    const [idObjetivo, setIdObjetivo] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [idCategoria, setIdCategoria] = useState('');
+    const [objetivos, setObjetivos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
+
 
 
     useEffect(() => {
-        listar();
+        listarObjetivos();
+        listarCategorias();
     }, []);
 
     
-    const listar = () => {
+    const listarCategorias = () => {
 
-        fetch(`${url}/usuario`)
+        fetch(url + '/categoria')
             .then(response => response.json())
             .then(dados => {
-                setUsuario(dados.data);
+                setCategorias(dados.data);
+                limparCampos();
+            })
+            .catch(err => console.error(err));
+    }
+
+    const listarObjetivos = () => {
+
+        fetch(url + '/objetivo')
+            .then(response => response.json())
+            .then(dados => {
+                setObjetivos(dados.data);
                 limparCampos();
             })
             .catch(err => console.error(err));
@@ -33,66 +47,76 @@ const CrudObjetivos = () => {
     const editar = (event) => {
         event.preventDefault();
 
-        fetch(`${url}/usuario/${event.target.value}`, {
-            method : 'GET'
+        fetch(url + '/objetivo/' + event.target.value, {
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
+            }
         })
         .then(response => response.json())
-        .then(dado => {
-            setId(dado.idUsuario);
-            setNome(dado.nome);
-            setPontuacao(dado.pontuacao);
+        .then(dados => {
+            setIdObjetivo(dados.idObjetivo);
+            setDescricao(dados.descricao);
+            setIdCategoria(dados.idCategoria);
         })
+        .catch(err => console.error(err));
+
     }
 
     
     const remover = (event) => {
         event.preventDefault();
 
-        fetch(`${url}/usuario/${event.target.value}`, {
-            method : 'DELETE',
+        console.log(event.target.value)
 
+        fetch(url + '/objetivo/' + event.target.value, {
+            method: 'DELETE',
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
+            }
         })
-        .then(response => response.json())
-        .then(dados => {
-            alert('Usuario removido com sucesso!');
-
-            listar();
-        })
-        .catch(err => console.error(err))
+            .then(response => response.json())
+            .then(data => {
+                alert('O objetivo foi removido!')
+                listarObjetivos()
+            })
+            .catch(err => console.error(err));
     }
 
-    const enviar = (event) => {
+    const salvar = (event) => {
         event.preventDefault();
 
-        const usuarios = {
-            idUsuario : id,
-            nome : nome,
-            pontuacao : pontuacao,
+        let objetivo = {
+            // idObjetivo : id,
+            descricao : descricao,
+            idCategoria : idCategoria,
         }
 
 
+        let method = (idObjetivo === '' ? 'POST' : 'PUT');
+        let urlRequest = (idObjetivo === '' ? url + '/objetivo' : url + '/objetivo/' + idObjetivo);
 
-        fetch(`${url}/usuario/${id}`, {
-            method : 'PUT',
-            body : JSON.stringify(usuarios),
-            headers : {
-                'content-type' : 'application/json'
+        fetch(urlRequest, {
+            method: method,
+            body: JSON.stringify(objetivo),
+            headers: {
+                'content-type': 'application/json',
+                'authorization': 'Bearer ' + localStorage.getItem('token-edux')
             }
         })
-        .then(response => response.json())
-        .then(dados => {
-            alert('Usuario editado com sucesso!');
-
-            listar();
-        })
-        .catch(err => console.error(err))
-
+            .then(response => response.json())
+            .then(response => {
+                alert('Objetivo salvo');
+                limparCampos();
+                listarObjetivos();
+            })
+            .catch(err => console.error(err))
     }
 
     const limparCampos = () => {
-        setId(0);
-        setNome('');
-        setPontuacao('');
+        setIdObjetivo('');
+        setDescricao('');
+        setIdCategoria('');
     }
 
     
@@ -109,14 +133,27 @@ const CrudObjetivos = () => {
 
         <Card>  
             <Card.Body>
-                <Form onSubmit={event => enviar(event)}>
+                <Form onSubmit={event => salvar(event)}>
                     <Form.Group controlId="formBasicNome">
-                        <Form.Label>Nome</Form.Label>
-                        <Form.Control type="text" value={nome} onChange={event => setNome(event.target.value)} placeholder="Nome"></Form.Control>
-                        <Form.Label>Pontuação</Form.Label>
-                        <Form.Control type="text" value={pontuacao} onChange={event => setPontuacao(event.target.value)} placeholder="Pontuação"></Form.Control>
+                        <Form.Label>Descrição</Form.Label>
+                        <Form.Control type="text" value={descricao} onChange={event => setDescricao(event.target.value)} placeholder="Descrição"></Form.Control>
                     </Form.Group>
-                    <Button type="submit">Enviar</Button>
+                    
+                    <Form.Group controlId="formCategoria">
+                                <Form.Label>Categoria</Form.Label>
+                                <Form.Control as="select" value={idCategoria} onChange={event => setIdCategoria(event.target.value)}>
+                                    <option value={0}>Selecione</option>
+                                    {
+                                        categorias.map((item, index) => {
+                                            return (
+                                                <option key={index} value={item.idCategoria}>{item.tipo}</option>
+                                            )
+                                        })
+                                        
+                                    }
+                                </Form.Control>
+                            </Form.Group>
+                    <Button type="submit">salvar</Button>
                 </Form>
             </Card.Body>
         </Card>
@@ -124,21 +161,21 @@ const CrudObjetivos = () => {
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Pontuação</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    usuario.map((item, index) => {
+                    objetivos.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.nome}</td>
-                                <td>{item.pontuacao}</td>
+                                <td>{item.descricao}</td>
+                                <td>{item.idCategoriaNavigation.tipo}</td>
                                 <td>
-                                    <Button type="button" variant="primary" value={item.idUsuario} onClick={ event => editar(event)}>Editar</Button>
-                                    <Button type="button" variant="danger" value={item.idUsuario} onClick={event => remover(event)} style={{ marginLeft : '15px' }} >Remover</Button>
+                                            <Button type="button" variant="primary" value={item.idObjetivo} onClick={event => editar(event)}>Editar</Button>
+                                            <Button type="button" variant="danger"  value={item.idObjetivo} onClick={event => remover(event)}>Excluir</Button>
                                 </td>
                             </tr>
                         )

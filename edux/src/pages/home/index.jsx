@@ -48,7 +48,7 @@ const Home = () => {
                 </div>
             </Jumbotron>
 
-            <Container>
+            <Container >
                 <Row className="text-center">
                     <Col>
                         <Card style={{ width: '18rem' }}>
