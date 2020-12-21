@@ -48,7 +48,7 @@ const Perfil = () => {
             <Container className=' alert-success br-15 '>
                 <div className='d-flex align-items-center flex-column '>
                     <img className='imgperfil mg-p' src="https://barcarena.pa.gov.br/portal/img/perfil/padrao.jpg" alt="Imagem de Perfil" />
-                    <h3>{jwt_decode(token).nameid}</h3>
+                    <h3>{jwt_decode(token).family_name}</h3>
                     <h6>{jwt_decode(token).email}</h6>
                     {/* {renderItem()} */}
                 </div>

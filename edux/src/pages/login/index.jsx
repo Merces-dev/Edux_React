@@ -39,10 +39,13 @@ const Login = () => {
             .then(data => {
                 localStorage.setItem('token-edux', data.token);
                 let user = jwt_decode(data.token); 
-                if (user.role === 'Admin')
+                if (user.role === 'Admin'){
                     history.push('/admin/dashboard');
-                else
+                }
+                else{
                     history.push('/perfil');
+
+                }
             })
             .catch(err => console.error(err));
     };
